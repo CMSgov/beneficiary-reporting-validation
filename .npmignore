@@ -1,0 +1,19 @@
+.idea
+node_modules
+examples
+coverage
+build/test
+app
+typings
+/compiled
+*.map.js
+.vscode
+npm-debug.log
+Thumbs.db
+.DS_Store
+*.ts
+
+measures.json
+
+# Keep
+!*.d.ts

@@ -1,0 +1,41 @@
+{
+  "name": "@cmsgov/wi-validation",
+  "version": "0.0.1",
+  "description": "CMS Web Interface Client and API Validation",
+  "keywords": [
+    "validation",
+    "api",
+    "client"
+  ],
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "mocha build/test",
+    "build": "./node_modules/typescript/bin/tsc",
+    "prepare": "rm -rf build && npm run build && rm -rf build/test",
+    "postbuild": "cp -R lib/data build/lib"
+  },
+  "author": "Semantic Bits",
+  "contributors": [
+    "James Garrett <james.garrett@semanticbits.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CMSgov/beneficiary-reporting-validation.git"
+  },
+  "homepage": "https://github.com/CMSgov/beneficiary-reporting-validation",
+  "bugs": {
+    "url": "https://github.com/CMSgov/beneficiary-reporting-validation/issues",
+    "email": "djames.garrett@semanticbits.com"
+  },
+  "devDependencies": {
+    "@types/node": "~6.0.60",
+    "typescript": "~2.3.3",
+    "mocha": "^3.4.2",
+    "@types/mocha": "^2.2.41"
+  },
+  "dependencies": {
+    "joi": "^13.2.0"
+  }
+}

@@ -1,0 +1,25 @@
+# Folders
+node_modules
+examples
+coverage
+build
+app
+typings
+
+# Generated files
+/compiled
+*.map.js
+*.metadata.json
+*.map
+*.d.ts
+*.js
+npm-debug.log
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode
+.idea
+
+# Keep
+!test/spec.d.ts
