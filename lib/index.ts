@@ -26,10 +26,10 @@ export const Validate = async (body: any, schema: string): Promise<ValidationRes
     return { valid: false, error: { code: 422, message: 'Invalid Request: Incorrect schema type supplied' } }
   }
 
-  const valid = Joi.validate(body, currentSchema);
-
-  if (valid && valid.error !== null) {
-    return { valid: false, error: { code: 422, message: `Request was invalid: ${valid.error}` } }
+  try {
+    const valid = await Joi.validate(body, currentSchema);
+  } catch(error) {
+    return { valid: false, error: { code: 422, message: `Request was invalid: ${error}` } }
   }
 
   return { valid: true };
