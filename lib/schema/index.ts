@@ -1,5 +1,5 @@
-export enum SchemaType {
-  clinic = 'clinic',
-}
+// export enum WiSchemaType {
+//   Clinic = 'clinic'
+// }
 
 export { ClinicSchema } from './clinic';

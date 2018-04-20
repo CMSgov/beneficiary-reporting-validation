@@ -12,7 +12,8 @@
   "scripts": {
     "pretest": "npm run build",
     "test": "mocha build/test",
-    "build": "./node_modules/typescript/bin/tsc"
+    "build": "./node_modules/typescript/bin/tsc",
+    "prepare": "rm -rf build && npm run build && rm -rf build/test"
   },
   "author": "Semantic Bits",
   "contributors": [
@@ -30,11 +31,11 @@
   "devDependencies": {
     "@types/node": "~6.0.60",
     "typescript": "~2.3.3",
+    "@types/joi": "^13.0.7",
     "mocha": "^3.4.2",
     "@types/mocha": "^2.2.41"
   },
   "dependencies": {
-    "@types/joi": "^13.0.7",
     "joi": "^13.2.0"
   }
 }

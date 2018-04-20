@@ -1,6 +1,5 @@
 import * as Joi from 'joi';
 import {
-  SchemaType,
   ClinicSchema
 } from './schema';
 
@@ -12,9 +11,9 @@ export interface ValidationResult {
   }
 }
 
-async function getSchema(schema: SchemaType): Promise<any> {
+function getSchema(schema: string): any {
   switch (schema) {
-    case SchemaType.clinic:
+    case 'clinic':
       return ClinicSchema;
     default:
       return null;
@@ -22,7 +21,7 @@ async function getSchema(schema: SchemaType): Promise<any> {
 }
 
 export const Validate = async (body: any, schema: string): Promise<ValidationResult> => {
-  const currentSchema = getSchema(SchemaType[schema]);
+  const currentSchema = getSchema(schema);
   if (!currentSchema) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: Incorrect schema type supplied' } }
   }
