@@ -21,7 +21,7 @@ async function getSchema(schema: SchemaType): Promise<any> {
   }
 }
 
-export const validate = async (body: any, schema: string): Promise<ValidationResult> => {
+export const Validate = async (body: any, schema: string): Promise<ValidationResult> => {
   const currentSchema = getSchema(SchemaType[schema]);
   if (!currentSchema) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: Incorrect schema type supplied' } }
