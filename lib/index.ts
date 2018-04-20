@@ -22,11 +22,11 @@ function getSchema(schema: string): any {
 
 export const Validate = async (body: any, schema: string): Promise<ValidationResult> => {
   const currentSchema = getSchema(schema);
-  if (!currentSchema) {
+  if (currentSchema === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: Incorrect schema type supplied' } }
   }
 
-  const valid = await Joi.validate(body, currentSchema);
+  const valid = Joi.validate(body, currentSchema);
 
   if (valid && valid.error !== null) {
     return { valid: false, error: { code: 422, message: `Request was invalid: ${valid.error}` } }
