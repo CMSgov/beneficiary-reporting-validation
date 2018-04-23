@@ -36,6 +36,7 @@
     "@types/mocha": "^2.2.41"
   },
   "dependencies": {
-    "joi": "^13.2.0"
+    "joi": "^13.2.0",
+    "reflect-metadata": "^0.1.12"
   }
 }
