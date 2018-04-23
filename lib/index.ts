@@ -20,8 +20,8 @@ const validateSchema = async function(payload: { [key: string]: any }, schemaTyp
   }
 
   try {
-    const valid = await Joi.validate(payload, schemaType);
-  } catch(error) {
+    await Joi.validate(payload, schemaType);
+  } catch (error) {
     return { valid: false, error: { code: 422, message: `Request was invalid: ${error}` } }
   }
 
@@ -39,27 +39,22 @@ export const Validate = function(schemaType: Joi.JoiObject) {
   return function(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
     let originalMethod = descriptor.value;
 
-    descriptor.value = async function() {
+    descriptor.value = async function(...args) {
       let payloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyName);
       if (payloadParameters) {
         for (let parameterIndex of payloadParameters) {
-          if (parameterIndex >= arguments.length || arguments[parameterIndex] === undefined) {
+          if (parameterIndex >= args.length || args[parameterIndex] === undefined) {
             throw new Error('Missing payload.');
           }
-          console.log(payloadParameters, parameterIndex);
-          const validation = await validateSchema(arguments[0], schemaType);
-          if (validation && validation.error) {
+
+          const validation = await validateSchema(args[parameterIndex], schemaType);
+          if (validation && validation.valid === false) {
             throw new Error(`Request was invalid: ${validation.error.code} ${validation.error.message}`);
           }
-          // .then(valid => {
-          //   if (valid.error) {
-          //     throw new Error(`Request was invalid: ${valid.error.code} ${valid.error.message}`);
-          //   }
-          // });
         }
       }
 
-      return originalMethod.apply(this, arguments);
+      return originalMethod.apply(this, args);
     }
   }
 }
