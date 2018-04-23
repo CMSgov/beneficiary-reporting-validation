@@ -16,10 +16,6 @@ export const Validate = async (body: { [key: string]: any }, schemaType: Joi.Sch
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect body was supplied.' } }
   }
 
-  if (typeof schemaType !== 'object' && schemaType === null) {
-    return { valid: false, error: { code: 422, message: 'Invalid Request: Incorrect schema type supplied' } }
-  }
-
   try {
     const valid = await Joi.validate(body, schemaType);
   } catch(error) {
