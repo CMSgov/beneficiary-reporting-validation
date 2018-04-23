@@ -11,23 +11,17 @@ export interface ValidationResult {
   }
 }
 
-function getSchema(schema: string): any {
-  switch (schema) {
-    case 'clinic':
-      return ClinicSchema;
-    default:
-      return null;
+export const Validate = async (body: { [key: string]: any }, schemaType: Joi.SchemaLike): Promise<ValidationResult> => {
+  if (typeof body !== 'object' || body === null) {
+    return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect body was supplied.' } }
   }
-}
 
-export const Validate = async (body: any, schema: string): Promise<ValidationResult> => {
-  const currentSchema = getSchema(schema);
-  if (currentSchema === null) {
+  if (typeof schemaType !== 'object' && schemaType === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: Incorrect schema type supplied' } }
   }
 
   try {
-    const valid = await Joi.validate(body, currentSchema);
+    const valid = await Joi.validate(body, schemaType);
   } catch(error) {
     return { valid: false, error: { code: 422, message: `Request was invalid: ${error}` } }
   }
