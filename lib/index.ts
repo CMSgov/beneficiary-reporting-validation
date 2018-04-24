@@ -14,15 +14,21 @@ export interface ValidationResult {
   }
 }
 
-export const ValidateSchema = async function(payload: { [key: string]: any }, schemaType: Joi.JoiObject): Promise<ValidationResult> {
+export const ValidateSchema = function(payload: any, schemaType: Joi.JoiObject): ValidationResult {
   if (typeof payload !== 'object' || payload === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } }
   }
 
+  let result;
+
   try {
-    await Joi.validate(payload, schemaType);
+    result = Joi.validate(payload, schemaType);
   } catch (error) {
     return { valid: false, error: { code: 422, message: `Request was invalid: ${error}` } }
+  }
+
+  if (result.error != null) {
+    return { valid: false, error: { code: 422, message: `Request was invalid: ${result.error}` } }
   }
 
   return { valid: true };
@@ -37,20 +43,22 @@ export const payload = function(target: Object, propertyKey: string | symbol, pa
 export const Validate = function(schemaType: Joi.JoiObject) {
   return function(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
     let originalMethod = descriptor.value;
-    descriptor.value = async function(...args) {
+    descriptor.value = function(...args) {
       let payloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyName);
       if (payloadParameters) {
         for (let parameterIndex of payloadParameters) {
           if (parameterIndex >= args.length || args[parameterIndex] === undefined) {
             throw new Error('Missing payload.');
           }
-          const validation = await ValidateSchema(args[parameterIndex], schemaType);
+
+          const validation = ValidateSchema(args[parameterIndex], schemaType);
           if (validation && validation.valid === false) {
             throw new Error(`Request was invalid: ${validation.error.code} ${validation.error.message}`);
           }
+
+          return originalMethod.apply(this, args);
         }
       }
-      return originalMethod.apply(this, args);
     }
   }
 }
