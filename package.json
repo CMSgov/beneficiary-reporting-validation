@@ -25,7 +25,7 @@
   "homepage": "https://github.com/CMSgov/beneficiary-reporting-validation",
   "bugs": {
     "url": "https://github.com/CMSgov/beneficiary-reporting-validation/issues",
-    "email": "djames.garrett@semanticbits.com"
+    "email": "james.garrett@semanticbits.com"
   },
   "devDependencies": {
     "@types/joi": "^13.0.7",
