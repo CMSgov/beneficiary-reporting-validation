@@ -55,10 +55,10 @@ export const Validate = function(schemaType: JoiObject) {
           if (validation && validation.valid === false) {
             throw new Error(`Request was invalid: ${validation.error.code} ${validation.error.message}`);
           }
-
-          return originalMethod.apply(this, args);
         }
       }
+
+      return originalMethod.apply(this, args);
     }
   }
 }
