@@ -1,3 +1,9 @@
 export { Regexes } from './lib/regexes';
-export { ClinicSchema } from './lib/schema';
+export {
+  ClinicSchema,
+  ProviderSchema,
+  ActivitySchema,
+  BeneficiarySchema,
+  NotificationSchema
+} from './lib/schema';
 export { Validate, ValidateSchema, payload } from './lib';
