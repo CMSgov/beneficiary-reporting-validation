@@ -7,13 +7,11 @@
     ],
     "target": "es5",
     "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "declaration": true,
     "rootDir": ".",
     "outDir": "build",
     "types": ["node", "mocha"]
-  },
-  "include": [
-    "index.ts",
-    "lib/**/*"
-  ]
+  }
 }

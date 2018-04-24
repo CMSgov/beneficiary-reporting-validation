@@ -6,3 +6,16 @@ export const MockSchema = Joi.object().keys({
   firstName: Joi.string().max(100).regex(Regexes.lettersNumbersAndSymbolsOnly).required(),
   lastName: Joi.string().max(100).regex(Regexes.lettersNumbersAndSymbolsOnly).required()
 });
+
+export const validModel = {
+  id: '1',
+  firstName: 'Firstname',
+  lastName: 'Lastname'
+}
+
+export const invalidModel = {
+  id: '1',
+  firstName: 'Firstname',
+  lastName: 'Lastname',
+  notGonnaWork: 'But let\'s try'
+}
