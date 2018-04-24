@@ -35,19 +35,22 @@ describe('Validation', () => {
       }
     }
 
+    let fixture;
+
+    beforeEach(() => {
+      fixture = new Fixture();
+    });
+
     it('should return if the payload validates', () => {
-      const fixture = new Fixture();
       const result = fixture.testingMethod(validModel);
       assert.equal(result, 3);
     });
 
     it('should throw if the payload does not validate', () => {
-      const fixture = new Fixture();
       assert.throws(() => fixture.testingMethod(invalidModel));
     });
 
     it('should not throw if the payload does validate', () => {
-      const fixture = new Fixture();
       assert.doesNotThrow(() => fixture.testingMethod(validModel));
     });
   });
