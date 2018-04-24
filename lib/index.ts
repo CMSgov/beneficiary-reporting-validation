@@ -1,8 +1,8 @@
 import 'reflect-metadata';
-import * as Joi from 'joi';
 import {
   ClinicSchema
 } from './schema';
+import { JoiObject, validate } from 'joi';
 
 const payloadMetadataKey = Symbol('payload');
 
@@ -14,7 +14,7 @@ export interface ValidationResult {
   }
 }
 
-export const ValidateSchema = function(payload: any, schemaType: Joi.JoiObject): ValidationResult {
+export const ValidateSchema = function(payload: any, schemaType: JoiObject): ValidationResult {
   if (typeof payload !== 'object' || payload === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } }
   }
@@ -22,7 +22,7 @@ export const ValidateSchema = function(payload: any, schemaType: Joi.JoiObject):
   let result;
 
   try {
-    result = Joi.validate(payload, schemaType);
+    result = validate(payload, schemaType);
   } catch (error) {
     return { valid: false, error: { code: 422, message: `Request was invalid: ${error}` } }
   }
@@ -40,7 +40,7 @@ export const payload = function(target: Object, propertyKey: string | symbol, pa
   Reflect.defineMetadata(payloadMetadataKey, existingPayloadParameters, target, propertyKey);
 }
 
-export const Validate = function(schemaType: Joi.JoiObject) {
+export const Validate = function(schemaType: JoiObject) {
   return function(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
     let originalMethod = descriptor.value;
     descriptor.value = function(...args) {
