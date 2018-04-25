@@ -4,14 +4,14 @@ import { ValidateSchema } from '../';
 
 const payloadMetadataKey = Symbol('payload');
 
-export const payload = function(target: Object, propertyKey: string | symbol, parameterIndex: number) {
+export function payload(target: Object, propertyKey: string | symbol, parameterIndex: number): void {
   let existingPayloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyKey) || [];
   existingPayloadParameters.push(parameterIndex);
   Reflect.defineMetadata(payloadMetadataKey, existingPayloadParameters, target, propertyKey);
 }
 
-export const Validate = function(schemaType: Schema) {
-  return function(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
+export function Validate(schemaType: Schema): MethodDecorator {
+  return function(target: any, propertyName: string | symbol, descriptor: PropertyDescriptor) {
     if (descriptor == null || descriptor.value == null) {
       throw new Error('Invalid decorated method');
     }

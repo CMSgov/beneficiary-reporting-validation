@@ -42,11 +42,6 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "globals": {
-      "ts-jest": {
-        "tsConfigFile": "./test/tsconfig.spec.json"
-      }
-    },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",

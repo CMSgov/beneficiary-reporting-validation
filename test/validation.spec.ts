@@ -17,11 +17,6 @@ describe('Validation', () => {
       expect(result).toEqual({ valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } });
     });
 
-    it('should return error when invalid schema supplied', () => {
-      const result = ValidateSchema(validModel, null);
-      expect(result).toEqual({ valid: false, error: { code: 422, message: 'Request was invalid: ValidationError: \"value\" must be one of [null]' } });
-    });
-
     it('should return error when schema doesn\'t validate', () => {
       const result = ValidateSchema(invalidModel, MockSchema);
       expect(result).toEqual({ valid: false, error: { code: 422, message: `Request was invalid: ValidationError: \"notGonnaWork\" is not allowed` } });

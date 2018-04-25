@@ -1,15 +1,15 @@
-import * as Joi from 'joi';
+import { describe, Schema } from 'joi';
 
 function pick(obj: { [key: string]: any }, ...keys: string[]): {} {
   return Object.assign({}, ...keys.map(prop => ({ [prop]: obj[prop] })));
 }
 
-function getAllowableFields(schemaType: Joi.Schema): string[] {
-  return Object.keys(Joi.describe(schemaType).children);
+function getAllowableFields(schemaType: Schema): string[] {
+  return Object.keys(describe(schemaType).children);
 }
 
-export const PickAllowableFields = function(schemaType: Joi.Schema) {
-  return function(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
+export const PickAllowableFields = function(schemaType: Schema): MethodDecorator {
+  return function(target: any, propertyName: string | symbol, descriptor: PropertyDescriptor) {
     if (descriptor == null || descriptor.value == null) {
       throw new Error('Invalid decorated method');
     }
