@@ -1,7 +1,9 @@
-import { ValidateSchema, Validate, payload } from '../lib/index';
-import { MockSchema, validModel, invalidModel } from './mocks/mock-schema';
-
+import { Schema } from 'joi';
 import * as assert from 'assert';
+
+import { ValidateSchema } from '../lib/index';
+import { Validate, payload } from '../lib/decorators';
+import { MockSchema, validModel, invalidModel } from './mocks/mock-schema';
 
 describe('Validation', () => {
   describe('ValidateSchema()', () => {
@@ -35,14 +37,14 @@ describe('Validation', () => {
       }
     }
 
-    let fixture;
+    let fixture: any;
 
     beforeEach(() => {
       fixture = new Fixture();
     });
 
     it('should return if the payload validates', () => {
-      const result = fixture.testingMethod(validModel);
+      const result: any = fixture.testingMethod(validModel);
       assert.equal(result, 3);
     });
 

@@ -1,10 +1,8 @@
-import 'reflect-metadata';
+
 import {
   ClinicSchema
 } from './schema';
-import { JoiObject, validate } from 'joi';
-
-const payloadMetadataKey = Symbol('payload');
+import { Schema, validate } from 'joi';
 
 export interface ValidationResult {
   valid: boolean;
@@ -14,7 +12,7 @@ export interface ValidationResult {
   }
 }
 
-export const ValidateSchema = function(payload: any, schemaType: JoiObject): ValidationResult {
+export const ValidateSchema = function(payload: any, schemaType: Schema): ValidationResult {
   if (typeof payload !== 'object' || payload === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } }
   }
@@ -34,31 +32,5 @@ export const ValidateSchema = function(payload: any, schemaType: JoiObject): Val
   return { valid: true };
 }
 
-export const payload = function(target: Object, propertyKey: string | symbol, parameterIndex: number) {
-  let existingPayloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyKey) || [];
-  existingPayloadParameters.push(parameterIndex);
-  Reflect.defineMetadata(payloadMetadataKey, existingPayloadParameters, target, propertyKey);
-}
 
-export const Validate = function(schemaType: JoiObject) {
-  return function(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
-    let originalMethod = descriptor.value;
-    descriptor.value = function(...args) {
-      let payloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyName);
-      if (payloadParameters) {
-        for (let parameterIndex of payloadParameters) {
-          if (parameterIndex >= args.length || args[parameterIndex] === undefined) {
-            throw new Error('Missing payload.');
-          }
 
-          const validation = ValidateSchema(args[parameterIndex], schemaType);
-          if (validation && validation.valid === false) {
-            throw new Error(`Request was invalid: ${validation.error.code} ${validation.error.message}`);
-          }
-        }
-      }
-
-      return originalMethod.apply(this, args);
-    }
-  }
-}

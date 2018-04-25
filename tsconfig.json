@@ -12,6 +12,8 @@
     "declaration": true,
     "rootDir": ".",
     "outDir": "build",
-    "types": ["node", "mocha"]
+    "types": ["node", "mocha"],
+    "strict": true,
+    "strictNullChecks": false
   }
 }

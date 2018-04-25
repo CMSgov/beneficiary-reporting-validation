@@ -6,4 +6,5 @@ export {
   BeneficiarySchema,
   NotificationSchema
 } from './lib/schema';
-export { Validate, ValidateSchema, payload } from './lib';
+export { ValidateSchema } from './lib';
+export { Validate, PickAllowableFields, payload } from './lib/decorators';
