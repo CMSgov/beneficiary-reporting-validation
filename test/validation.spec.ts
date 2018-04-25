@@ -22,32 +22,4 @@ describe('Validation', () => {
       expect(result).toEqual({ valid: false, error: { code: 422, message: `Request was invalid: ValidationError: \"notGonnaWork\" is not allowed` } });
     });
   });
-
-  describe('Decorators', () => {
-    class Fixture {
-      @Validate(MockSchema)
-      testingMethod(@payload data: any): number {
-        return 3;
-      }
-    }
-
-    let fixture: any;
-
-    beforeEach(() => {
-      fixture = new Fixture();
-    });
-
-    it('should return if the payload validates', () => {
-      const result: any = fixture.testingMethod(validModel);
-      expect(result).toEqual(3);
-    });
-
-    it('should throw if the payload does not validate', () => {
-      expect(() => fixture.testingMethod(invalidModel)).toThrow();
-    });
-
-    it('should not throw if the payload does validate', () => {
-      expect(() => fixture.testingMethod(validModel)).not.toThrow();
-    });
-  });
 });
