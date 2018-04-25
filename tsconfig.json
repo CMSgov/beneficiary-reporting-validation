@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "lib": [
-      "es2016",
       "dom",
       "es2017"
     ],
@@ -12,8 +11,6 @@
     "declaration": true,
     "rootDir": ".",
     "outDir": "build",
-    "types": ["node", "mocha"],
-    "strict": true,
-    "strictNullChecks": false
+    "strict": true
   }
 }

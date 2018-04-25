@@ -1,5 +1,4 @@
 import { Schema } from 'joi';
-import * as assert from 'assert';
 
 import { ValidateSchema } from '../lib/index';
 import { Validate, payload } from '../lib/decorators';
@@ -10,22 +9,22 @@ describe('Validation', () => {
 
     it('should validate correctly', () => {
       const result = ValidateSchema(validModel, MockSchema);
-      assert.deepEqual(result, { valid: true });
+      expect(result).toEqual({ valid: true });
     });
 
     it('should return error when invalid body supplied', () => {
       const result = ValidateSchema(null, MockSchema);
-      assert.deepEqual(result, { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } });
+      expect(result).toEqual({ valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } });
     });
 
     it('should return error when invalid schema supplied', () => {
       const result = ValidateSchema(validModel, null);
-      assert.deepEqual(result, { valid: false, error: { code: 422, message: 'Request was invalid: ValidationError: \"value\" must be one of [null]' } });
+      expect(result).toEqual({ valid: false, error: { code: 422, message: 'Request was invalid: ValidationError: \"value\" must be one of [null]' } });
     });
 
     it('should return error when schema doesn\'t validate', () => {
       const result = ValidateSchema(invalidModel, MockSchema);
-      assert.deepEqual(result, { valid: false, error: { code: 422, message: `Request was invalid: ValidationError: \"notGonnaWork\" is not allowed` } });
+      expect(result).toEqual({ valid: false, error: { code: 422, message: `Request was invalid: ValidationError: \"notGonnaWork\" is not allowed` } });
     });
   });
 
@@ -45,15 +44,15 @@ describe('Validation', () => {
 
     it('should return if the payload validates', () => {
       const result: any = fixture.testingMethod(validModel);
-      assert.equal(result, 3);
+      expect(result).toEqual(3);
     });
 
     it('should throw if the payload does not validate', () => {
-      assert.throws(() => fixture.testingMethod(invalidModel));
+      expect(() => fixture.testingMethod(invalidModel)).toThrow();
     });
 
     it('should not throw if the payload does validate', () => {
-      assert.doesNotThrow(() => fixture.testingMethod(validModel));
+      expect(() => fixture.testingMethod(validModel)).not.toThrow();
     });
   });
 });

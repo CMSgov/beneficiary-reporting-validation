@@ -10,7 +10,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "test": "jest",
     "build": "./node_modules/typescript/bin/tsc",
     "prepare": "rm -rf build && npm run build && rm -rf build/test"
   },
@@ -28,15 +28,33 @@
     "email": "james.garrett@semanticbits.com"
   },
   "devDependencies": {
+    "@types/jest": "^22.2.3",
     "@types/joi": "^13.0.7",
-    "@types/mocha": "^2.2.41",
-    "@types/node": "~6.0.60",
-    "mocha": "^3.4.2",
-    "ts-node": "^6.0.0",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
     "typescript": "~2.3.3"
   },
   "dependencies": {
     "joi": "^13.2.0",
     "reflect-metadata": "^0.1.12"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "./test/tsconfig.spec.json"
+      }
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
