@@ -13,7 +13,6 @@
     "rootDir": ".",
     "outDir": "build",
     "types": ["node", "mocha"],
-    "strict": true,
-    "strictNullChecks": false
+    "strict": true
   }
 }

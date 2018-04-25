@@ -18,11 +18,6 @@ describe('Validation', () => {
       assert.deepEqual(result, { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } });
     });
 
-    it('should return error when invalid schema supplied', () => {
-      const result = ValidateSchema(validModel, null);
-      assert.deepEqual(result, { valid: false, error: { code: 422, message: 'Request was invalid: ValidationError: \"value\" must be one of [null]' } });
-    });
-
     it('should return error when schema doesn\'t validate', () => {
       const result = ValidateSchema(invalidModel, MockSchema);
       assert.deepEqual(result, { valid: false, error: { code: 422, message: `Request was invalid: ValidationError: \"notGonnaWork\" is not allowed` } });
