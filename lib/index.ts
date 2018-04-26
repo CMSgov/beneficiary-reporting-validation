@@ -1,8 +1,7 @@
-
+import { Schema, validate } from 'joi-browser';
 import {
   ClinicSchema
 } from './schema';
-import { Schema, validate } from 'joi';
 
 export interface ValidationResult {
   valid: boolean;
@@ -12,7 +11,7 @@ export interface ValidationResult {
   }
 }
 
-export const ValidateSchema = function(payload: any, schemaType: Schema): ValidationResult {
+export const ValidateSchema = function(payload: any, schemaType: typeof Schema): ValidationResult {
   if (typeof payload !== 'object' || payload === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } }
   }

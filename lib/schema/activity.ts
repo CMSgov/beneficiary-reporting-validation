@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from 'joi-browser';
 
 export const ActivitySchema = Joi.object().keys({
   id: Joi.string().optional().allow(null),

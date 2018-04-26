@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "joi": "^13.2.0",
+    "joi-browser": "^13.0.1",
     "reflect-metadata": "^0.1.12"
   },
   "jest": {
