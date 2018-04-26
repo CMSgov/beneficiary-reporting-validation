@@ -1,4 +1,4 @@
-import { describe, Schema } from 'joi';
+import { describe, Schema } from 'joi-browser';
 
 function pick(obj: { [key: string]: any }, ...keys: string[]): {} {
   return Object.assign({}, ...keys.map(prop => ({ [prop]: obj[prop] })));

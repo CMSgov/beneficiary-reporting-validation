@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from 'joi-browser';
 import { Regexes } from '../regexes';
 
 export const ProviderSchema = Joi.object().keys({

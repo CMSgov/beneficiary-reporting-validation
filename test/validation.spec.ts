@@ -1,4 +1,4 @@
-import { Schema } from 'joi';
+import { Schema } from 'joi-browser';
 
 import { ValidateSchema } from '../lib/index';
 import { Validate, payload } from '../lib/decorators';
