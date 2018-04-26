@@ -10,9 +10,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "test": "jest",
-    "build": "./node_modules/typescript/bin/tsc",
-    "prepare": "rm -rf build && npm run build && rm -rf build/test"
+    "test": "jest"
   },
   "author": "Semantic Bits",
   "contributors": [
