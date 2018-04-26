@@ -1,4 +1,4 @@
-import { Schema } from 'joi';
+import { Schema } from 'joi-browser';
 
 import { Validate, PickAllowableFields, payload } from '../lib/decorators';
 import { MockSchema, validModel, invalidModel } from './mocks/mock-schema';

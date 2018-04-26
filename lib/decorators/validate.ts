@@ -10,7 +10,7 @@ export function payload(target: Object, propertyKey: string | symbol, parameterI
   Reflect.defineMetadata(payloadMetadataKey, existingPayloadParameters, target, propertyKey);
 }
 
-export function Validate(schemaType: typeof Schema): MethodDecorator {
+export function Validate(schemaType: Schema): MethodDecorator {
   return function(target: any, propertyName: string | symbol, descriptor: PropertyDescriptor) {
     if (descriptor == null || descriptor.value == null) {
       throw new Error('Invalid decorated method');
