@@ -3,35 +3,35 @@ import * as webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const config: webpack.Configuration = {
-  mode: 'production',
   entry: './index.ts',
-  devtool: 'inline-source-map',
+  mode: "none",
+  devtool: 'source-map',
   plugins: [
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+      analyzerMode: 'static'
+    })
   ],
   output: {
     library: 'wi-validation',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: `${__dirname}/build`,
+    path: path.resolve(__dirname, 'build'),
     filename: 'wi-validation.js'
   },
   module: {
     rules: [
       {
-        // need to babelify joi, isemail, hoek, and topo's lib
-        test: /[\\\/]node_modules[\\\/](joi[\\\/]lib[\\\/]|hoek[\\\/]lib[\\\/]|topo[\\\/]lib[\\\/])/,
-        loader: 'babel-loader'
+        test: /\.ts$/,
+        loader: 'ts-loader'
       },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
-      }
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.ts', '.js'],
+    alias: {
+      'isemail': path.resolve(__dirname, 'isemail.stub.ts')
+    }
   },
   node: {
     global: true,

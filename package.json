@@ -11,8 +11,10 @@
   "types": "build/index.d.ts",
   "scripts": {
     "test": "jest",
+    "tsc": "tsc",
     "build": "webpack",
-    "prepare": "rm -rf build && npm run build && rm -rf build/test"
+    "prepare": "rm -rf build && npm run build && rm -rf build/test",
+    "analyze": "build/stats.json"
   },
   "author": "Semantic Bits",
   "contributors": [
@@ -27,10 +29,14 @@
     "url": "https://github.com/CMSgov/beneficiary-reporting-validation/issues",
     "email": "james.garrett@semanticbits.com"
   },
+  "browser": {
+    "isemail": false
+  },
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "@types/node": "^10.0.0",
     "@types/webpack": "^4.1.4",
+    "@types/webpack-bundle-analyzer": "^2.9.2",
     "babel-loader": "^7.1.4",
     "jest": "^22.4.3",
     "json-loader": "^0.5.7",
@@ -39,6 +45,7 @@
     "ts-node": "^6.0.1",
     "typescript": "^2.8.3",
     "webpack": "^4.6.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.15"
   },
   "dependencies": {
