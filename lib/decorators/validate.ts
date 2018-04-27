@@ -4,6 +4,11 @@ import { ValidateSchema } from '../';
 
 const payloadMetadataKey = Symbol('payload');
 
+enum ActionType {
+  Validate,
+  PickAllowableFields
+}
+
 function pick(obj: { [key: string]: any }, ...keys: string[]): {} {
   return Object.assign({}, ...keys.map(prop => ({ [prop]: obj[prop] })));
 }
@@ -19,15 +24,15 @@ export function payload(target: Object, propertyKey: string | symbol, parameterI
 }
 
 export function Validate(schemaType: Schema): MethodDecorator {
-  return performAction('validate', schemaType);
+  return performAction(ActionType.Validate, schemaType);
 }
 
 export const PickAllowableFields = function(schemaType: Schema): MethodDecorator {
-  return performAction('pick', schemaType);
+  return performAction(ActionType.PickAllowableFields, schemaType);
 }
 
 
-function performAction(type: string, schemaType: Schema) {
+function performAction(type: ActionType, schemaType: Schema) {
   return function(target: any, propertyName: string | symbol, descriptor: PropertyDescriptor) {
     if (descriptor == null || descriptor.value == null) {
       throw new Error('Invalid decorated method');
@@ -44,13 +49,13 @@ function performAction(type: string, schemaType: Schema) {
           }
 
           switch (type) {
-            case 'validate':
+            case ActionType.Validate:
               const validation = ValidateSchema(args[parameterIndex], schemaType);
               if (validation && validation.valid === false && validation.error != null) {
                 throw new Error(`Request was invalid: ${validation.error.code} ${validation.error.message}`);
               }
               break;
-            case 'pick':
+            case ActionType.PickAllowableFields:
               args[parameterIndex] = pick(args[parameterIndex], ...getAllowableFields(schemaType));
               break;
             default:
