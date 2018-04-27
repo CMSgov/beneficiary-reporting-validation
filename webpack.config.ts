@@ -22,7 +22,6 @@ const config: webpack.Configuration = {
   module: {
     rules: [
       {
-        // need to babelify joi, hoek, and topo's lib
         test: /[\\\/]node_modules[\\\/](joi[\\\/]lib[\\\/]|hoek[\\\/]lib[\\\/]|topo[\\\/]lib[\\\/])/,
         use: {
           loader: 'babel-loader',
