@@ -1,2 +1,1 @@
-export { Validate, payload } from './validate';
-export { PickAllowableFields } from './pick-allowable-fields';
+export { Validate, PickAllowableFields, payload } from './validate';
