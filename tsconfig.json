@@ -16,7 +16,11 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
   },
+  "incluse": [
+    "./lib/**/*.ts"
+  ],
   "exclude": [
+    "./test/**/*.ts",
     "./webpack.config.ts"
   ]
 }

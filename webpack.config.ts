@@ -23,7 +23,8 @@ const config: webpack.Configuration = {
     rules: [
       {
         test: /\.ts$/,
-        loader: 'ts-loader'
+        loader: 'ts-loader',
+        exclude: '/test'
       },
     ]
   },

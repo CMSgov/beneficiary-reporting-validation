@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "prepare": "rm -rf build && npm run build && rm -rf build/test",
+    "prepare": "rm -rf build && npm run build"
   },
   "author": "Semantic Bits",
   "contributors": [
