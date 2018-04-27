@@ -4,7 +4,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const config: webpack.Configuration = {
   entry: './index.ts',
-  mode: "none",
+  mode: 'none',
   devtool: 'source-map',
   plugins: [
     new BundleAnalyzerPlugin({
@@ -22,10 +22,29 @@ const config: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: '/test'
+        // need to babelify joi, isemail, hoek, and topo's lib
+        test: /[\\\/]node_modules[\\\/](joi[\\\/]lib[\\\/]|hoek[\\\/]lib[\\\/]|topo[\\\/]lib[\\\/])/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader'
+      }
     ]
   },
   resolve: {
