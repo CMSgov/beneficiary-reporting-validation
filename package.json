@@ -11,10 +11,8 @@
   "types": "build/index.d.ts",
   "scripts": {
     "test": "jest",
-    "tsc": "tsc",
     "build": "webpack",
     "prepare": "rm -rf build && npm run build && rm -rf build/test",
-    "analyze": "build/stats.json"
   },
   "author": "Semantic Bits",
   "contributors": [
