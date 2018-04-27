@@ -1,4 +1,4 @@
-import { Schema, validate } from 'joi-browser';
+import { Schema, validate } from 'joi';
 import {
   ClinicSchema
 } from './schema';
