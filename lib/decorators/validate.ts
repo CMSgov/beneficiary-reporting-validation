@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Schema } from 'joi-browser';
+import { Schema } from 'joi';
 import { ValidateSchema } from '../';
 
 const payloadMetadataKey = Symbol('payload');

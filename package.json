@@ -7,11 +7,11 @@
     "api",
     "client"
   ],
-  "main": "build/index.js",
+  "main": "build/wi-validation.js",
   "types": "build/index.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "./node_modules/typescript/bin/tsc",
+    "build": "webpack",
     "prepare": "rm -rf build && npm run build && rm -rf build/test"
   },
   "author": "Semantic Bits",
@@ -29,12 +29,20 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
+    "@types/node": "^10.0.0",
+    "@types/webpack": "^4.1.4",
+    "babel-loader": "^7.1.4",
     "jest": "^22.4.3",
+    "json-loader": "^0.5.7",
     "ts-jest": "^22.4.4",
-    "typescript": "^2.8.0"
+    "ts-loader": "^4.2.0",
+    "ts-node": "^6.0.1",
+    "typescript": "^2.8.3",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
   },
   "dependencies": {
-    "joi-browser": "^13.0.1",
+    "joi": "^13.2.0",
     "reflect-metadata": "^0.1.12"
   },
   "jest": {

@@ -14,7 +14,7 @@
 
 // TODO express type of Schema in a type-parameter (.default, .valid, .example etc)
 
-declare module 'joi-browser' {
+declare module 'joi' {
   export type Types = 'any' | 'alternatives' | 'array' | 'boolean' | 'binary' | 'date' | 'function' | 'lazy' | 'number' | 'object' | 'string';
 
   export type LanguageOptions = string | boolean | null | {
