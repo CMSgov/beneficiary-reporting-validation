@@ -10,7 +10,16 @@
     "emitDecoratorMetadata": true,
     "declaration": true,
     "rootDir": ".",
-    "outDir": "build",
-    "strict": true
-  }
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+  },
+  "include": [
+    "./lib/**/*.ts"
+  ],
+  "exclude": [
+    "./test/**/*.ts",
+    "./webpack.config.ts"
+  ]
 }

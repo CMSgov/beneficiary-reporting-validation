@@ -1,4 +1,4 @@
-import * as Joi from 'joi-browser';
+import * as Joi from 'joi';
 import { Regexes } from '../regexes';
 
 export const NotificationSchema = Joi.object().keys({
