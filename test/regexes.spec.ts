@@ -15,6 +15,8 @@ describe('Regexes', () => {
           return Regexes.capitalLettersAndNumbersOnly.test(test);
         case 'NumbersOnly':
           return Regexes.numbersOnly.test(test);
+        case 'NumbersOnlyAndEmptyString':
+          return Regexes.numbersOnlyAndEmptyString.test(test);          
         case 'ValidAddress':
           return Regexes.validAddress.test(test);
         case 'ValidZipCode':
@@ -97,6 +99,28 @@ describe('Regexes', () => {
 
     it('should return false if does not validates', () => {
       const result: any = fixture.testingMethod('NumbersOnly', 'ABC123');
+      expect(result).toEqual(false);
+    });
+  });
+
+  describe('NumbersOnlyAndEmptyString', () => {
+    it('should return true if empty string', () => {
+      const result: any = fixture.testingMethod('NumbersOnlyAndEmptyString', '');
+      expect(result).toEqual(true);
+    });
+
+    it('should return false if it only contains spaces', () => {
+      const result: any = fixture.testingMethod('NumbersOnlyAndEmptyString', ' ');
+      expect(result).toEqual(false);
+    });
+
+    it('should return true if valid number', () => {
+      const result: any = fixture.testingMethod('NumbersOnlyAndEmptyString', '123123');
+      expect(result).toEqual(true);
+    });
+
+    it('should return false if does not validates', () => {
+      const result: any = fixture.testingMethod('NumbersOnlyAndEmptyString', 'ABC123');
       expect(result).toEqual(false);
     });
   });
