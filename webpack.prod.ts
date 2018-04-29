@@ -4,7 +4,7 @@ import * as webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const config: webpack.Configuration = merge(common, {
-  mode: 'production',
+  mode: 'none',
   plugins: [
     new BundleAnalyzerPlugin({
       openAnalyzer: false,

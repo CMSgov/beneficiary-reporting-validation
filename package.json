@@ -13,7 +13,7 @@
     "test": "jest",
     "dev": "webpack --config webpack.dev.ts",
     "build": "webpack --config webpack.prod.ts",
-    "prepare": "rm -rf build && npm run build"
+    "prepare": "npm run build"
   },
   "author": "Semantic Bits",
   "contributors": [
