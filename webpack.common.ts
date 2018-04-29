@@ -1,16 +1,11 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 
 const config: webpack.Configuration = {
   entry: './index.ts',
-  mode: 'none',
-  devtool: 'source-map',
   plugins: [
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false,
-      analyzerMode: 'static'
-    })
+    new CleanWebpackPlugin(['build'])
   ],
   output: {
     library: 'wi-validation',
