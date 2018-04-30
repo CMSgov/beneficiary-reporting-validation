@@ -12,7 +12,8 @@ const config: webpack.Configuration = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
     path: path.resolve(__dirname, 'build'),
-    filename: 'wi-validation.js'
+    filename: 'wi-validation.js',
+    globalObject: `typeof self !== 'undefined' ? self : this`
   },
   module: {
     rules: [
