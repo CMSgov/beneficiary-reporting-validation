@@ -1,6 +1,6 @@
 {
   "name": "@cmsgov/wi-validation",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "CMS Web Interface Client and API Validation",
   "keywords": [
     "validation",
@@ -17,7 +17,9 @@
   },
   "author": "Semantic Bits",
   "contributors": [
-    "James Garrett <james.garrett@semanticbits.com>"
+    "James Garrett <james.garrett@semanticbits.com>",
+    "John McEntee <john.mcentee@semanticbits.com>",
+    "Yong Choi <yong.choi@semanticbits.com>"
   ],
   "repository": {
     "type": "git",
