@@ -13,10 +13,12 @@ describe('Regexes', () => {
           return Regexes.lettersAndSymbolsOnly.test(test);
         case 'CapitalLettersAndNumbersOnly':
           return Regexes.capitalLettersAndNumbersOnly.test(test);
+        case 'ContainsNonWhitespace':
+          return Regexes.containsNonWhitespace.test(test);
         case 'NumbersOnly':
           return Regexes.numbersOnly.test(test);
         case 'NumbersOnlyAndEmptyString':
-          return Regexes.numbersOnlyAndEmptyString.test(test);          
+          return Regexes.numbersOnlyAndEmptyString.test(test);
         case 'ValidAddress':
           return Regexes.validAddress.test(test);
         case 'ValidZipCode':
@@ -87,6 +89,18 @@ describe('Regexes', () => {
 
     it('should return false if does not validates', () => {
       const result: any = fixture.testingMethod('CapitalLettersAndNumbersOnly', 'caps123');
+      expect(result).toEqual(false);
+    });
+  });
+
+  describe('ContainsNonWhitespace', () => {
+    it('should return true if validates', () => {
+      const result: any = fixture.testingMethod('ContainsNonWhitespace', 'nospaceshere');
+      expect(result).toEqual(true);
+    });
+
+    it('should return false if does not validates', () => {
+      const result: any = fixture.testingMethod('ContainsNonWhitespace', '    ');
       expect(result).toEqual(false);
     });
   });

@@ -3,6 +3,7 @@ export const Regexes = {
   lettersNumbersAndSymbolsOnly: /^[A-Za-z0-9'\-,\/ ]+$/,
   lettersAndSymbolsOnly: /^[A-Za-z'\-\/ ]+$/,
   capitalLettersAndNumbersOnly: /^[0-9A-Z]+$/,
+  containsNonWhitespace: /\S/,
   numbersOnly: /^[0-9]+$/,
   numbersOnlyAndEmptyString: /^(\s{0}|\d+)$/,
   validAddress: /^[0-9A-Za-z'\-\/#_. ]+$/,
