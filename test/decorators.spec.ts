@@ -36,7 +36,7 @@ describe('Decorators', () => {
   describe('PickAllowableFields', () => {
     class Fixture {
       @PickAllowableFields(MockSchema)
-      testingMethod(data: any): any {
+      testingMethod(@payload data: any): any {
         return data;
       }
     }
@@ -47,7 +47,7 @@ describe('Decorators', () => {
       fixture = new Fixture();
     });
 
-    it('should return only allowable fields', () => {
+    it('should return the picked properties', () => {
       const result: any = fixture.testingMethod(invalidModel);
       expect(result).toEqual(validModel);
     });
