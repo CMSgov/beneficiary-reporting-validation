@@ -4,7 +4,9 @@ export {
   ProviderSchema,
   ActivitySchema,
   BeneficiarySchema,
-  NotificationSchema
+  NotificationSchema,
+  OrganizationSchema,
+  GroupSize
 } from './lib/schema';
 export { ValidateSchema } from './lib';
 export { Validate, PickAllowableFields, payload } from './lib/decorators';
