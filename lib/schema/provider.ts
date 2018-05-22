@@ -6,5 +6,6 @@ export const ProviderSchema = Joi.object().keys({
   firstName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnly).required(),
   lastName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnly).required(),
   ein: Joi.string().max(32).regex(Regexes.lettersAndNumbersOnly).optional().allow(null),
-  credentials: Joi.string().max(128).regex(Regexes.validCredentials).optional().allow(null)
+  credentials: Joi.string().max(128).regex(Regexes.validCredentials).optional().allow(null),
+  organizationId: Joi.number().optional().allow(null)
 });
