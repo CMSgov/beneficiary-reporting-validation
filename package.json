@@ -17,7 +17,8 @@
   },
   "author": "Semantic Bits",
   "contributors": [
-    "James Garrett <james.garrett@semanticbits.com>"
+    "James Garrett <james.garrett@semanticbits.com>",
+    "Peter Schnabel <peter.schnabel@semanticbits.com>"
   ],
   "repository": {
     "type": "git",

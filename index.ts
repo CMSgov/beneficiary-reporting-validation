@@ -5,6 +5,7 @@ export {
   ActivitySchema,
   BeneficiarySchema,
   NotificationSchema,
+  OrganizationContactSchema,
   OrganizationSchema,
   GroupSize
 } from './lib/schema';
