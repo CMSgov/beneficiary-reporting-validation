@@ -5,8 +5,9 @@ export {
   ActivitySchema,
   BeneficiarySchema,
   NotificationSchema,
-  OrganizationContactSchema,
   OrganizationSchema,
+  OrganizationContactSchema,
+  OrganizationAddressSchema,
   GroupSize
 } from './lib/schema';
 export { ValidateSchema } from './lib';
