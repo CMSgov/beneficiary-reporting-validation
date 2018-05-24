@@ -3,5 +3,7 @@ export { ProviderSchema } from './provider';
 export { ActivitySchema } from './activity';
 export { BeneficiarySchema } from './beneficiary';
 export { NotificationSchema } from './notification';
-export { OrganizationContactSchema } from './organizationContact';
 export { OrganizationSchema, GroupSize } from './organization';
+export { OrganizationContactSchema } from './organizationContact';
+export { OrganizationAddressSchema } from './organizationAddress';
+
