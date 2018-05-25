@@ -5,10 +5,11 @@ export {
   ActivitySchema,
   BeneficiarySchema,
   NotificationSchema,
+  NotificationMessageTypes,
   OrganizationSchema,
+  GroupSize,
   OrganizationContactSchema,
-  OrganizationAddressSchema,
-  GroupSize
+  OrganizationAddressSchema
 } from './lib/schema';
 export { ValidateSchema } from './lib';
 export { Validate, PickAllowableFields, payload } from './lib/decorators';
