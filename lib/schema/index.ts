@@ -4,6 +4,6 @@ export { ActivitySchema } from './activity';
 export { BeneficiarySchema } from './beneficiary';
 export { NotificationSchema } from './notification';
 export { OrganizationSchema, GroupSize } from './organization';
-export { OrganizationContactSchema } from './organizationContact';
-export { OrganizationAddressSchema } from './organizationAddress';
+export { OrganizationContactSchema } from './organization-contact';
+export { OrganizationAddressSchema } from './organization-address';
 
