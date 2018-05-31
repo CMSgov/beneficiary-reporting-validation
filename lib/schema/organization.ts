@@ -10,5 +10,5 @@ export enum GroupSize {
 export const OrganizationSchema = Joi.object().keys({
   name: Joi.string().max(128).regex(Regexes.containsNonWhitespace, 'ContainsNonWhitespace').required(),
   nickname: Joi.string().max(128).regex(Regexes.containsNonWhitespace, 'ContainsNonWhitespace').allow(null),
-  groupSize: Joi.string().valid(GroupSize.OneHundredOrGreater, GroupSize.TwentyFiveNinetyNine, GroupSize.TwoTwentyFour)
+  groupSize: Joi.string().valid(Object.values(GroupSize))
 });
