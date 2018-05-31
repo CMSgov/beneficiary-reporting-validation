@@ -1,5 +1,4 @@
 import * as Joi from 'joi';
-import { Regexes } from '../regexes';
 
 export enum NotificationMessageTypes {
   Error = 'ERROR',

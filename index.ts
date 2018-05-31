@@ -4,6 +4,7 @@ export {
   ProviderSchema,
   ActivitySchema,
   BeneficiarySchema,
+  BeneficiaryMeasureSchema,
   NotificationSchema,
   NotificationMessageTypes,
   OrganizationSchema,
