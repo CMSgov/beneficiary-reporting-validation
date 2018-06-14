@@ -9,5 +9,5 @@ export const ClinicSchema = Joi.object().keys({
   city: Joi.string().max(50).regex(Regexes.lettersAndSymbolsOnly, 'LettersAndSymbolsOnly').optional().allow(null),
   state: Joi.string().optional().allow(null),
   zipCode: Joi.string().min(5).max(10).regex(Regexes.validZipCode, 'ValidZipCode').optional().allow(null),
-  organizationId: Joi.number().optional().allow(null)
+  organizationId: Joi.number().required()
 });
