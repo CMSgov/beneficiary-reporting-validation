@@ -22,5 +22,5 @@ export const BeneficiaryMeasureSchema = Joi.object().keys({
   confirmed: Joi.string().valid(Object.values(MeasureConfirmedOptions)).optional().allow(null),
   skippedReason: Joi.string().max(1024).optional().allow(null),
   helpDeskTicket: Joi.string().max(15).optional().allow(null),
-  comment: Joi.string().optional().allow(null)
+  comments: Joi.string().optional().allow(null)
 });
