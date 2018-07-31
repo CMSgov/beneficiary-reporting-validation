@@ -1,5 +1,7 @@
 import * as Joi from 'joi';
 
-export const ActivitySchema = Joi.object().keys({
+export const ActivityMap = {
   action: Joi.string().required()
-});
+};
+
+export const ActivitySchema = Joi.object(ActivityMap);

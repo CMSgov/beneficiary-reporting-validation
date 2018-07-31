@@ -1,7 +1,4 @@
 import { Schema, validate } from 'joi';
-import {
-  ClinicSchema
-} from './schema';
 
 export interface ValidationResult {
   valid: boolean;
