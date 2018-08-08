@@ -1,13 +1,6 @@
 import * as Joi from 'joi';
 import { Regexes } from '../regexes';
 
-export enum MeasureStatus {
-  complete = 'COMPLETE',
-  incomplete = 'INCOMPLETE',
-  skipped = 'SKIPPED',
-  notRanked = 'NOT_RANKED'
-}
-
 export enum MeasureConfirmedOptions {
   Y = 'Y',
   N = 'N',
