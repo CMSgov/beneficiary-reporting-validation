@@ -20,6 +20,3 @@ export const MeasureMap = {
 };
 
 export const MeasureSchema = Joi.object(MeasureMap);
-
-/** Deprecated */
-export const BeneficiaryMeasureSchema = Joi.object(MeasureMap);
