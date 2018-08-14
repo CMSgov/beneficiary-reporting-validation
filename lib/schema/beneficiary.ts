@@ -7,11 +7,11 @@ export enum Gender {
   Unknown = 'UNKNOWN',
 }
 
-export const BeneficiaryMap = {
-  firstName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnly).required(),
-  lastName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnly).required(),
-  gender: Joi.string().valid(Object.values(Gender)).required(),
-  dateOfBirth: Joi.date().required(),
+const fields = {
+  firstName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnly),
+  lastName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnly),
+  gender: Joi.string().valid(Object.values(Gender)),
+  dateOfBirth: Joi.date(),
   mrn: Joi.string().max(128).allow(null),
   comments: Joi.string().allow(null),
   skippedReason: Joi.string().allow(null),
@@ -22,4 +22,14 @@ export const BeneficiaryMap = {
   qualificationComments: Joi.string().allow(null)
 };
 
+// This schema includes required fields, should be used when creating a bene.
+export const BeneficiaryMap = {
+  ...fields,
+  firstName: fields.firstName.required(),
+  lastName: fields.lastName.required(),
+  gender: fields.gender.required(),
+  dateOfBirth: fields.dateOfBirth.required()
+};
+
 export const BeneficiarySchema = Joi.object().keys(BeneficiaryMap);
+export const BeneficiaryFieldsSchema = Joi.object().keys(fields);
