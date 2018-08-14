@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import { BeneficiarySchema, BeneficiaryFieldsSchema } from '../lib/schema/beneficiary';
+import { BeneficiarySchema } from '../lib/schema/beneficiary';
 
 describe('BeneficiarySchema', () => {
   describe('gender', () => {
@@ -55,21 +55,49 @@ describe('BeneficiarySchema', () => {
   });
 });
 
-describe('BeneficiaryFieldsSchema', () => {
+describe('BeneficiarySchema', () => {
   it('should validate correctly', () => {
     const result = Joi.validate({
       firstName: 'Joe',
       lastName: 'Doe',
       gender: 'MALE',
       dateOfBirth: Date.now().toString()
-    }, BeneficiaryFieldsSchema);
+    }, BeneficiarySchema);
     expect(result.error).toBeNull();
   });
 
   it('should allow partial objects', () => {
     const result = Joi.validate({
       firstName: 'Joe'
-    }, BeneficiaryFieldsSchema);
+    }, BeneficiarySchema);
     expect(result.error).toBeNull();
+  });
+
+  it('should allow null firstName', () => {
+    const result = Joi.validate({
+      firstName: null
+    }, BeneficiarySchema);
+    expect(result.error).not.toBeNull();
+  });
+
+  it('should allow null lastName', () => {
+    const result = Joi.validate({
+      lastName: null
+    }, BeneficiarySchema);
+    expect(result.error).not.toBeNull();
+  });
+
+  it('should allow null dateOfBirth', () => {
+    const result = Joi.validate({
+      dateOfBirth: null
+    }, BeneficiarySchema);
+    expect(result.error).not.toBeNull();
+  });
+
+  it('should allow null gender', () => {
+    const result = Joi.validate({
+      gender: null
+    }, BeneficiarySchema);
+    expect(result.error).not.toBeNull();
   });
 });
