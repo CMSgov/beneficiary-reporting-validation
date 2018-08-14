@@ -72,4 +72,32 @@ describe('BeneficiaryFieldsSchema', () => {
     }, BeneficiaryFieldsSchema);
     expect(result.error).toBeNull();
   });
+
+  it('should allow null firstName', () => {
+    const result = Joi.validate({
+      firstName: null
+    }, BeneficiaryFieldsSchema);
+    expect(result.error).not.toBeNull();
+  });
+
+  it('should allow null lastName', () => {
+    const result = Joi.validate({
+      lastName: null
+    }, BeneficiaryFieldsSchema);
+    expect(result.error).not.toBeNull();
+  });
+
+  it('should allow null dateOfBirth', () => {
+    const result = Joi.validate({
+      dateOfBirth: null
+    }, BeneficiaryFieldsSchema);
+    expect(result.error).not.toBeNull();
+  });
+
+  it('should allow null gender', () => {
+    const result = Joi.validate({
+      gender: null
+    }, BeneficiaryFieldsSchema);
+    expect(result.error).not.toBeNull();
+  });
 });
