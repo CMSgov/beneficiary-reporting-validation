@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import { BeneficiarySchema } from '../lib/schema/beneficiary';
+import { BeneficiarySchema, BeneficiaryFieldsSchema } from '../lib/schema/beneficiary';
 
 describe('BeneficiarySchema', () => {
   describe('gender', () => {
@@ -53,5 +53,23 @@ describe('BeneficiarySchema', () => {
       expect(result.error).not.toBeNull();
     });
   });
+});
 
+describe('BeneficiaryFieldsSchema', () => {
+  it('should validate correctly', () => {
+    const result = Joi.validate({
+      firstName: 'Joe',
+      lastName: 'Doe',
+      gender: 'MALE',
+      dateOfBirth: Date.now().toString()
+    }, BeneficiaryFieldsSchema);
+    expect(result.error).toBeNull();
+  });
+
+  it('should allow partial objects', () => {
+    const result = Joi.validate({
+      firstName: 'Joe'
+    }, BeneficiaryFieldsSchema);
+    expect(result.error).toBeNull();
+  });
 });
