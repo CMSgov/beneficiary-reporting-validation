@@ -14,7 +14,6 @@ export const BeneficiaryMap = {
   dateOfBirth: Joi.date(),
   mrn: Joi.string().max(128).allow(null),
   comments: Joi.string().max(1000).allow(null),
-  skippedReason: Joi.string().allow(null),
   medicalRecordFound: Joi.string().allow(null),
   medicalNotQualifiedReason: Joi.string().allow(null),
   medicalNotQualifiedDate: Joi.date().allow(null),

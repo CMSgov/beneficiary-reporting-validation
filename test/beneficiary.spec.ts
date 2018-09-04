@@ -100,4 +100,11 @@ describe('BeneficiarySchema', () => {
     }, BeneficiarySchema);
     expect(result.error).not.toBeNull();
   });
+
+  it('should not allow unknown fields', () => {
+    const result = Joi.validate({
+      skippedReason: 'some reason'
+    }, BeneficiarySchema);
+    expect(result.error).not.toBeNull();
+  });
 });
