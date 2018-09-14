@@ -8,7 +8,7 @@ export enum GroupSize {
 }
 
 export const OrganizationMap = {
-  name: Joi.string().max(128).regex(Regexes.containsNonWhitespace, 'ContainsNonWhitespace').required(),
+  name: Joi.string().max(128).trim().required(),
   nickname: Joi.string().max(128).regex(Regexes.containsNonWhitespace, 'ContainsNonWhitespace').allow(null),
   groupSize: Joi.string().valid(Object.values(GroupSize))
 };

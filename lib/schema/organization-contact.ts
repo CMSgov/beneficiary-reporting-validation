@@ -2,10 +2,10 @@ import * as Joi from 'joi';
 import { Regexes } from '../regexes';
 
 export const OrganizationContactMap = {
-  firstName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnly).required(),
-  lastName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnly).required(),
+  firstName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnly).trim().required(),
+  lastName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnly).trim().required(),
   email: Joi.string().max(100).regex(Regexes.email).required(),
-  phone: Joi.string().length(10).regex(Regexes.numbersOnly).required(),
+  phone: Joi.string().length(10).regex(Regexes.numbersOnly).trim().required(),
   phoneExtension: Joi.string().optional().max(6).allow(null)
 };
 
