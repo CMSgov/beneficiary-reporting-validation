@@ -39,6 +39,7 @@ describe('BeneficiaryComplexSchema', () => {
     }, BeneficiaryComplexSchema);
     expect(result.error).toBeNull();
   });
+
   it('should fail validation if there are extra bene properties', () => {
     const result = Joi.validate({
         ...goodBene,
@@ -50,9 +51,9 @@ describe('BeneficiaryComplexSchema', () => {
             }]
         }]
     }, BeneficiaryComplexSchema);
-    console.log(result);
     expect(result.error).toBeTruthy();
   });
+
   it('should fail validation if there are extra measure properties', () => {
     const result = Joi.validate({
         ...goodBene,
@@ -64,9 +65,9 @@ describe('BeneficiaryComplexSchema', () => {
             }]
         }]
     }, BeneficiaryComplexSchema);
-    console.log(result);
     expect(result.error).toBeTruthy();
   });
+
   it.only('should fail validation if there are extra submission properties', () => {
     const result = Joi.validate({
         ...goodBene,
@@ -78,7 +79,6 @@ describe('BeneficiaryComplexSchema', () => {
             }]
         }]
     }, BeneficiaryComplexSchema);
-    console.log(result);
     expect(result.error).toBeTruthy();
   });
 });
