@@ -6,8 +6,7 @@ describe('SubmissionSchema', () => {
     const result = Joi.validate({
       attribute: 'attriute string',
       value: 'value',
-      scope: 'scope value',
-      comments: 'comments value'
+      scope: 'scope value'
     }, SubmissionSchema);
     expect(result.error).toBeNull();
   });
@@ -22,13 +21,6 @@ describe('SubmissionSchema', () => {
   it('should allow null scope', () => {
     const result = Joi.validate({
       scope: null
-    }, SubmissionSchema);
-    expect(result.error).not.toBeNull();
-  });
-
-  it('should allow null comments', () => {
-    const result = Joi.validate({
-      comments: null
     }, SubmissionSchema);
     expect(result.error).not.toBeNull();
   });
