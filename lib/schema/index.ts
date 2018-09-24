@@ -10,3 +10,4 @@ export * from './organization-contact';
 export * from './organization-address';
 export * from './registration';
 export * from './submission';
+export * from './measure-reset';
