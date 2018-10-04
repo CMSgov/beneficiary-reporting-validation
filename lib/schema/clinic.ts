@@ -8,8 +8,7 @@ export const ClinicMap = {
   address2: Joi.string().max(100).regex(Regexes.validAddress, 'ValidAddress').optional().allow(null),
   city: Joi.string().max(50).regex(Regexes.lettersAndSymbolsOnly, 'LettersAndSymbolsOnly').optional().allow(null),
   state: Joi.string().length(2).regex(Regexes.stateAbbreviations).optional().allow(null),
-  zipCode: Joi.string().min(5).max(10).regex(Regexes.validZipCode, 'ValidZipCode').optional().allow(null),
-  organizationId: Joi.number().required()
+  zipCode: Joi.string().min(5).max(10).regex(Regexes.validZipCode, 'ValidZipCode').optional().allow(null)
 };
 
 export const ClinicSchema = Joi.object(ClinicMap);
