@@ -10,8 +10,7 @@ describe('ClinicSchema', () => {
       address2: null,
       city: 'My City',
       state: 'PA',
-      zipCode: '12345',
-      organizationId: 1
+      zipCode: '12345'
     }, ClinicSchema);
     expect(result.error).toBeNull();
   });
@@ -19,8 +18,7 @@ describe('ClinicSchema', () => {
   it('should allow partial objects', () => {
     const result = Joi.validate({
       clinicId: '123456789',
-      name: 'Clinic',
-      organizationId: 1
+      name: 'Clinic'
     }, ClinicSchema);
     expect(result.error).toBeNull();
   });
