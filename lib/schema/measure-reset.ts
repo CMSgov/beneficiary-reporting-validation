@@ -1,8 +1,8 @@
 import * as Joi from 'joi';
 
 export const MeasureResetMap = {
-  measureSelections: Joi.array().items(Joi.string()),
-  clearBeneficiaryConfirmation: Joi.boolean().required()
+  measures: Joi.array().items(Joi.string()).required(),
+  confirmation: Joi.boolean().required()
 };
 
 export const MeasureResetSchema = Joi.object(MeasureResetMap);
