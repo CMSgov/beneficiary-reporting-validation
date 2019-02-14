@@ -6,7 +6,7 @@ export const OrganizationContactMap = {
   lastName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnly).trim().required(),
   email: Joi.string().max(100).regex(Regexes.email).required(),
   phone: Joi.string().length(10).regex(Regexes.numbersOnly).trim().required(),
-  phoneExtension: Joi.string().optional().max(6).allow(null)
+  phoneExtension: Joi.string().max(6).regex(Regexes.numbersOnly).optional().allow(null)
 };
 
 export const OrganizationContactSchema = Joi.object(OrganizationContactMap);
