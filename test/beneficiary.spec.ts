@@ -58,8 +58,8 @@ describe('BeneficiarySchema', () => {
 describe('BeneficiarySchema', () => {
   it('should validate correctly', () => {
     const result = Joi.validate({
-      firstName: 'Joe',
-      lastName: 'Doe',
+      firstName: 'Joe.',
+      lastName: 'Doe.',
       gender: 'MALE',
       dateOfBirth: Date.now().toString()
     }, BeneficiarySchema);
