@@ -2,6 +2,7 @@ export const Regexes = {
   lettersAndNumbersOnly: /^[0-9A-Za-z]+$/,
   lettersNumbersAndSymbolsOnly: /^[A-Za-z0-9'\-,\/ ]+$/,
   lettersAndSymbolsOnly: /^[A-Za-z'\-\/ ]+$/,
+  lettersAndSymbolsOnlyWithPeriod: /^[A-Za-z'\-.\/ ]+$/,
   capitalLettersAndNumbersOnly: /^[0-9A-Z]+$/,
   containsNonWhitespace: /\S/,
   numbersOnly: /^[0-9]+$/,
