@@ -4,8 +4,8 @@ import { OrganizationContactSchema } from '../lib/schema/organization-contact';
 describe('OrganizationContactSchema', () => {
   it('should validate correctly', () => {
     const result = Joi.validate({
-      firstName: 'First',
-      lastName: 'Name',
+      firstName: 'First.',
+      lastName: 'Name.',
       email: 'me@me.com',
       phone: '1234567890',
       phoneExtension: '123456'
