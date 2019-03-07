@@ -8,8 +8,8 @@ export enum Gender {
 }
 
 export const BeneficiaryMap = {
-  firstName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnlyWithPeriod),
-  lastName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnlyWithPeriod),
+  firstName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnlyWithPeriod).trim(),
+  lastName: Joi.string().max(128).regex(Regexes.lettersAndSymbolsOnlyWithPeriod).trim(),
   gender: Joi.string().valid(Object.values(Gender)),
   dateOfBirth: Joi.date(),
   mrn: Joi.string().max(128).allow(null),
