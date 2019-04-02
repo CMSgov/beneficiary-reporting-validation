@@ -7,7 +7,7 @@ export const Regexes = {
   containsNonWhitespace: /\S/,
   numbersOnly: /^[0-9]+$/,
   numbersOnlyAndEmptyString: /^(\s{0}|\d+)$/,
-  validAddress: /^[0-9A-Za-z'\-\/#_. ]+$/,
+  validAddress: /^[0-9A-Za-z'\-\/#_., ]+$/,
   validZipCode: /^[0-9]{5}(-[0-9]{4})?$/,
   validDay: /^0?([1-9]|[12][0-9]|3[01])$/,
   validMonth: /^0?([1-9]|1[0-2])$/,
