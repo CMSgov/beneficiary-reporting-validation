@@ -141,7 +141,7 @@ describe('Regexes', () => {
 
   describe('ValidAddress', () => {
     it('should return true if validates', () => {
-      const result: any = fixture.testingMethod('ValidAddress', '123 Street, Something else');
+      const result: any = fixture.testingMethod('ValidAddress', '123% Street & Road, Something else');
       expect(result).toEqual(true);
     });
 
