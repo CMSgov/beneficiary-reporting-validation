@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 
 export const RegistrationMap = {
-  groupReporting: Joi.boolean().required(),
+  bsrRegistered: Joi.boolean().required(),
   cahpsRegistered: Joi.boolean().required(),
 };
 
