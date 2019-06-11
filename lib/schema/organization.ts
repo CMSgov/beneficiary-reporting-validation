@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 import { Regexes } from '../regexes';
 
 export enum GroupSize {

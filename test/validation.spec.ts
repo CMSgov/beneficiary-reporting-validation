@@ -1,7 +1,4 @@
-import { Schema } from 'joi';
-
 import { ValidateSchema } from '../lib/index';
-import { Validate, payload } from '../lib/decorators';
 import { MockSchema, validModel, invalidModel } from './mocks/mock-schema';
 
 describe('Validation', () => {

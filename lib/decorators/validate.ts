@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { describe, Schema } from 'joi';
+import * as Joi from '@hapi/joi';
 import { ValidateSchema } from '..';
 
 const payloadMetadataKey = Symbol('payload');
@@ -13,8 +13,8 @@ function pick(obj: { [key: string]: any }, ...keys: string[]): {} {
   return Object.assign({}, ...keys.map(prop => ({ [prop]: obj[prop] })));
 }
 
-function getAllowableFields(schemaType: Schema): string[] {
-  return Object.keys(describe(schemaType).children);
+function getAllowableFields(schemaType: Joi.Schema): string[] {
+  return Object.keys(Joi.describe(schemaType).children);
 }
 
 export function payload(target: Object, propertyKey: string | symbol, parameterIndex: number): void {
@@ -23,16 +23,16 @@ export function payload(target: Object, propertyKey: string | symbol, parameterI
   Reflect.defineMetadata(payloadMetadataKey, existingPayloadParameters, target, propertyKey);
 }
 
-export function Validate(schemaType: Schema): MethodDecorator {
+export function Validate(schemaType: Joi.Schema): MethodDecorator {
   return performAction(ActionType.Validate, schemaType);
 }
 
-export const PickAllowableFields = function(schemaType: Schema): MethodDecorator {
+export const PickAllowableFields = function(schemaType: Joi.Schema): MethodDecorator {
   return performAction(ActionType.PickAllowableFields, schemaType);
 }
 
 
-function performAction(type: ActionType, schemaType: Schema) {
+function performAction(type: ActionType, schemaType: Joi.Schema) {
   return function(target: any, propertyName: string | symbol, descriptor: PropertyDescriptor) {
     if (descriptor == null || descriptor.value == null) {
       throw new Error('Invalid decorated method');

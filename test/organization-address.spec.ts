@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 import { OrganizationAddressSchema } from '../lib/schema/organization-address';
 
 describe('OrganizationAddressSchema', () => {
