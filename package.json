@@ -35,7 +35,6 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
-    "@hapi/joi": "^15.0.3",
     "@types/clean-webpack-plugin": "^0.1.2",
     "@types/hapi__joi": "^15.0.1",
     "@types/jest": "^22.2.3",
@@ -57,6 +56,7 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
+    "@hapi/joi": "^15.0.3",
     "reflect-metadata": "^0.1.12"
   },
   "jest": {
