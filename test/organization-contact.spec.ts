@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 import { OrganizationContactSchema } from '../lib/schema/organization-contact';
 
 describe('OrganizationContactSchema', () => {

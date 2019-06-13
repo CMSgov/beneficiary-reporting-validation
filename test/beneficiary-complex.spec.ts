@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 import { BeneficiaryComplexSchema } from '../lib/schema/beneficiary.complex';
 
 const goodMeasure = {

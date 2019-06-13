@@ -1,4 +1,5 @@
-import { Schema, validate } from 'joi';
+import * as Joi from '@hapi/joi';
+
 
 export interface ValidationResult {
   valid: boolean;
@@ -8,7 +9,7 @@ export interface ValidationResult {
   }
 }
 
-export const ValidateSchema = function (payload: any, schemaType: Schema): ValidationResult {
+export const ValidateSchema = function (payload: any, schemaType: Joi.Schema): ValidationResult {
   if (typeof payload !== 'object' || payload === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } }
   }
@@ -16,7 +17,7 @@ export const ValidateSchema = function (payload: any, schemaType: Schema): Valid
   let result;
 
   try {
-    result = validate(payload, schemaType);
+    result = Joi.validate(payload, schemaType);
   } catch (error) {
     return { valid: false, error: { code: 422, message: `Request was invalid: ${error}` } }
   }

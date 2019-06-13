@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 
 export const SubmissionMap = {
   attribute: Joi.string().max(255).trim().required(), // composite candidate key

@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 
 export const MeasureResetMap = {
   measures: Joi.array().items(Joi.string()).required(),

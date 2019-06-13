@@ -1,5 +1,3 @@
-import { Schema } from 'joi';
-
 import { Validate, PickAllowableFields, payload } from '../lib/decorators';
 import { MockSchema, validModel, invalidModel } from './mocks/mock-schema';
 
