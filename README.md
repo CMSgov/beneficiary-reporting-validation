@@ -58,3 +58,6 @@ Available regexes can be found here [Available Regexes](https://github.com/CMSgo
   const test = Regexes.lettersAndSymbolsOnly.test(value);
 ```
 
+## Note
+
+Currently, `@hapi/joi` dependency is included in the webpack bundle due to it’s lack of native support for browsers
