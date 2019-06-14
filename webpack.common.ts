@@ -40,7 +40,7 @@ const config: webpack.Configuration = {
   },
   node: {
     global: true,
-    Buffer: false,
+    Buffer: true,
     crypto: 'empty',
     net: 'empty',
     dns: 'empty'
