@@ -11,8 +11,8 @@
   "types": "build/index.d.ts",
   "scripts": {
     "test": "jest",
-    "dev": "webpack --config webpack.dev.ts",
-    "build": "webpack --config webpack.prod.ts",
+    "dev": "npm dedupe && webpack --config webpack.dev.ts",
+    "build": "npm dedupe && webpack --config webpack.prod.ts",
     "prepare": "npm run build"
   },
   "author": "Semantic Bits",
