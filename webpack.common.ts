@@ -18,7 +18,7 @@ const config: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /[\\\/]node_modules[\\\/](joi[\\\/]lib[\\\/]|hoek[\\\/]lib[\\\/]|topo[\\\/]lib[\\\/])/,
+        test: /[\\\/]node_modules[\\\/]@hapi[\\\/](joi[\\\/]lib[\\\/]|topo[\\\/]lib[\\\/]|address[\\\/]lib[\\\/]|hoek[\\\/]lib[\\\/])/,
         use: {
           loader: 'babel-loader',
           options: {
