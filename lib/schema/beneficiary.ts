@@ -1,5 +1,6 @@
 import * as Joi from '@hapi/joi';
 import { Regexes } from '../regexes';
+import moment from 'moment';
 
 export enum Gender {
   Male = 'MALE',
@@ -16,7 +17,7 @@ export const BeneficiaryMap = {
   comments: Joi.string().max(1000).allow(null),
   medicalRecordFound: Joi.string().allow(null),
   medicalNotQualifiedReason: Joi.string().allow(null),
-  medicalNotQualifiedDate: Joi.date().allow(null),
+  medicalNotQualifiedDate: Joi.date().allow(null).greater(`12/31/${moment().year() - 1}`).less(`01/01/${moment().year() + 1}`),
   clinicId: Joi.number().allow(null),
   qualificationComments: Joi.string().max(1000).allow(null)
 };
