@@ -14,13 +14,7 @@ export const ValidateSchema = function (payload: any, schemaType: Joi.Schema): V
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } }
   }
 
-  let result;
-
-  try {
-    result = Joi.validate(payload, schemaType);
-  } catch (error) {
-    return { valid: false, error: { code: 422, message: `Request was invalid: ${error}` } }
-  }
+  const result = Joi.validate(payload, schemaType);
 
   if (result.error != null) {
     return { valid: false, error: { code: 422, message: `Request was invalid: ${result.error}` } }

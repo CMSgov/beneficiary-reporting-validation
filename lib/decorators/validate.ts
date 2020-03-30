@@ -34,6 +34,8 @@ export const PickAllowableFields = function(schemaType: Joi.Schema): MethodDecor
 
 function performAction(type: ActionType, schemaType: Joi.Schema) {
   return function(target: any, propertyName: string | symbol, descriptor: PropertyDescriptor) {
+    // typescript makes this branch nearly impossible to test
+    /* istanbul ignore next */
     if (descriptor == null || descriptor.value == null) {
       throw new Error('Invalid decorated method');
     }
@@ -58,6 +60,8 @@ function performAction(type: ActionType, schemaType: Joi.Schema) {
             case ActionType.PickAllowableFields:
               args[parameterIndex] = pick(args[parameterIndex], ...getAllowableFields(schemaType));
               break;
+            // this will never be used
+            /* istanbul ignore next */
             default:
           }
 

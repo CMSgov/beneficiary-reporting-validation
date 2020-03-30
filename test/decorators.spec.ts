@@ -4,49 +4,40 @@ import { MockSchema, validModel, invalidModel } from './mocks/mock-schema';
 describe('Decorators', () => {
 
   describe('Validate & payload', () => {
+    let fixture: any;
+
     class Fixture {
       @Validate(MockSchema)
-      testingMethod(@payload data: any): number {
-        return 3;
+      validateFunc(@payload data: any): number {
+        return data;
+      }
+
+      @PickAllowableFields(MockSchema)
+      pickAllowableFieldsFunc(@payload data: any): any {
+        return data;
       }
     }
-
-    let fixture: any;
 
     beforeEach(() => {
       fixture = new Fixture();
     });
 
     it('should return if the payload validates', () => {
-      const result: any = fixture.testingMethod(validModel);
-      expect(result).toEqual(3);
+      const result = fixture.validateFunc(validModel);
+      expect(() => fixture.validateFunc(validModel)).not.toThrow();
+      expect(result).toEqual(validModel);
     });
 
     it('should throw if the payload does not validate', () => {
-      expect(() => fixture.testingMethod(invalidModel)).toThrow();
+      expect(() => fixture.validateFunc(invalidModel)).toThrow();
     });
 
-    it('should not throw if the payload does validate', () => {
-      expect(() => fixture.testingMethod(validModel)).not.toThrow();
-    });
-  });
-
-  describe('PickAllowableFields', () => {
-    class Fixture {
-      @PickAllowableFields(MockSchema)
-      testingMethod(@payload data: any): any {
-        return data;
-      }
-    }
-
-    let fixture: any;
-
-    beforeEach(() => {
-      fixture = new Fixture();
+    it('should throw if the payload does not exist', () => {
+      expect(() => fixture.validateFunc()).toThrow();
     });
 
     it('should return the picked properties', () => {
-      const result: any = fixture.testingMethod(invalidModel);
+      const result = fixture.pickAllowableFieldsFunc(invalidModel);
       expect(result).toEqual(validModel);
     });
   });

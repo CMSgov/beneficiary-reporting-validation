@@ -1,6 +1,6 @@
 {
   "name": "@cmsgov/wi-validation",
-  "version": "0.30.3",
+  "version": "0.31.0",
   "description": "CMS Web Interface Client and API Validation",
   "keywords": [
     "validation",
@@ -11,6 +11,7 @@
   "types": "build/index.d.ts",
   "scripts": {
     "test": "jest",
+    "test:cov": "jest --coverage",
     "dev": "npm dedupe && webpack --config webpack.dev.ts",
     "build": "npm dedupe && webpack --config webpack.prod.ts",
     "prepare": "npm run build"
@@ -63,7 +64,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -71,6 +72,26 @@
       "jsx",
       "json",
       "node"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/lib/**/*.ts",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/test/**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "lib/schema/index.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 96.4,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "coverageReporters": [
+      "text-summary",
+      "html"
     ]
   }
 }
