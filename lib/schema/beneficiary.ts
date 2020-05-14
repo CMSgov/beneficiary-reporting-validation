@@ -17,7 +17,7 @@ export const BeneficiaryMap = {
   comments: Joi.string().max(1000).allow(null),
   medicalRecordFound: Joi.string().allow(null),
   medicalNotQualifiedReason: Joi.string().allow(null),
-  medicalNotQualifiedDate: Joi.date().allow(null).greater(`12/31/${moment().year() - 2}`).less(`01/01/${moment().year()}`),
+  medicalNotQualifiedDate: Joi.date().allow(null).greater(`12/31/${moment().year() - 1}`).less(`01/01/${moment().year() + 1}`),
   clinicId: Joi.number().allow(null),
   qualificationComments: Joi.string().max(1000).allow(null)
 };
