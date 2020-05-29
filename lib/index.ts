@@ -1,5 +1,5 @@
 import * as Joi from '@hapi/joi';
-
+import { validate } from "class-validator";
 
 export interface ValidationResult {
   valid: boolean;
@@ -22,6 +22,3 @@ export const ValidateSchema = function (payload: any, schemaType: Joi.Schema): V
 
   return { valid: true };
 }
-
-
-

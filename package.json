@@ -57,6 +57,7 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
+    "class-validator": "^0.12.2",
     "moment": "^2.24.0",
     "reflect-metadata": "^0.1.13"
   },
