@@ -1,10 +1,30 @@
-import * as Joi from '@hapi/joi';
+import { IsString, MaxLength, Validate, Matches, IsOptional } from 'class-validator';
+
+import { RequiredString } from '../custom-validators';
 import { Regexes } from '../regexes';
 
-export const MeasureMap = {
-  name: Joi.string().max(128).regex(Regexes.lettersNumbersAndSymbolsOnly).trim().required(), // candidate key, not updatable
-  helpDeskTicket: Joi.string().max(15).optional().allow(null),
-  comments: Joi.string().max(1000).optional().allow(null)
-};
+export class MeasureSchema {
+  @Validate(RequiredString)
+  @IsString()
+  @Matches(Regexes.lettersNumbersAndSymbolsOnly)
+  @MaxLength(128)
+  name!: string;
 
-export const MeasureSchema = Joi.object(MeasureMap);
+  @IsOptional()
+  @IsString()
+  @MaxLength(15)
+  helpDeskTicket!: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(1000)
+  comments!: string | null;
+
+  get allowableFields() {
+    return [
+      'name',
+      'helpDeskTicket',
+      'comments',
+    ];
+  }
+}

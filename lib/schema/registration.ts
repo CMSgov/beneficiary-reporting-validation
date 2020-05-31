@@ -1,8 +1,18 @@
-import * as Joi from '@hapi/joi';
+import { IsNotEmpty, IsBoolean } from 'class-validator';
 
-export const RegistrationMap = {
-  bsrRegistered: Joi.boolean().required(),
-  cahpsRegistered: Joi.boolean().required(),
-};
+export class RegistrationSchema {
+  @IsNotEmpty()
+  @IsBoolean()
+  bsrRegistered!: boolean;
 
-export const RegistrationSchema = Joi.object(RegistrationMap);
+  @IsNotEmpty()
+  @IsBoolean()
+  cahpsRegistered!: boolean;
+
+  get allowableFields() {
+    return [
+      'bsrRegistered',
+      'cahpsRegistered',
+    ];
+  }
+}

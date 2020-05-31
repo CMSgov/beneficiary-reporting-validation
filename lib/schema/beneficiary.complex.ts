@@ -1,13 +1,28 @@
-import * as Joi from '@hapi/joi';
-import { BeneficiaryMap } from './beneficiary';
-import { MeasureMap } from './measure';
-import { SubmissionMap } from './submission';
+import { IsInt, IsNotEmpty, IsArray, ValidateNested, IsOptional } from 'class-validator';
 
-export const BeneficiaryComplexSchema = Joi.object({
-  ...BeneficiaryMap,
-  id: Joi.number().required(),
-  measures: Joi.array().items(Joi.object({
-    ...MeasureMap,
-    submissions: Joi.array().items(Joi.object(SubmissionMap)).optional()
-  })).optional()
-});
+import { BeneficiarySchema } from './beneficiary';
+import { MeasureSchema, SubmissionSchema } from './';
+
+type Measure = MeasureSchema & { submissions: SubmissionSchema[] };
+
+export class BeneficiaryComplexSchema extends BeneficiarySchema {
+  @IsNotEmpty()
+  @IsInt()
+  id!: number;
+
+  @ValidateNested()
+  @IsOptional()
+  @IsArray()
+  measures!: Measure[];
+
+  get allowableFields() {
+    return [
+      ...new BeneficiarySchema().allowableFields,
+      'id',
+      'measures'
+    ];
+  }
+}
+
+
+

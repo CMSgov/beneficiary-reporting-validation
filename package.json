@@ -1,6 +1,6 @@
 {
   "name": "@cmsgov/wi-validation",
-  "version": "0.31.2",
+  "version": "1.0.0",
   "description": "CMS Web Interface Client and API Validation",
   "keywords": [
     "validation",
@@ -12,9 +12,8 @@
   "scripts": {
     "test": "jest",
     "test:cov": "jest --coverage",
-    "dev": "npm dedupe && webpack --config webpack.dev.ts",
-    "build": "npm dedupe && webpack --config webpack.prod.ts",
-    "prepare": "npm run build"
+    "build": "./node_modules/typescript/bin/tsc",
+    "prepare": "rm -rf dist && npm run build"
   },
   "author": "Semantic Bits",
   "contributors": [
@@ -30,34 +29,18 @@
     "url": "https://github.com/CMSgov/beneficiary-reporting-validation/issues",
     "email": "james.garrett@semanticbits.com"
   },
-  "browser": {
-    "isemail": false
-  },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "@hapi/joi": "^15.0.3",
-    "@types/clean-webpack-plugin": "^0.1.2",
-    "@types/hapi__joi": "^15.0.1",
-    "@types/jest": "^22.2.3",
-    "@types/node": "^10.0.0",
-    "@types/webpack": "^4.1.4",
-    "@types/webpack-bundle-analyzer": "^2.9.2",
-    "@types/webpack-merge": "^4.1.3",
-    "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^0.1.19",
-    "jest": "^22.4.3",
-    "ts-jest": "^22.4.4",
-    "ts-loader": "^4.2.0",
-    "ts-node": "^6.0.1",
-    "typescript": "^2.8.3",
-    "webpack": "^4.6.0",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.4",
-    "webpack-merge": "^4.1.2"
+    "@types/jest": "^25.2.3",
+    "@types/node": "^14.0.5",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.0.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.3"
   },
   "dependencies": {
-    "moment": "^2.24.0",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
+    "date-fns": "^2.14.0",
     "reflect-metadata": "^0.1.13"
   },
   "jest": {

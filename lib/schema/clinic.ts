@@ -1,14 +1,60 @@
-import * as Joi from '@hapi/joi';
+import { IsString, MaxLength, Validate, Matches, IsOptional, Length } from 'class-validator';
+
+import { RequiredString } from '../custom-validators';
 import { Regexes } from '../regexes';
 
-export const ClinicMap = {
-  clinicId: Joi.string().max(9).regex(Regexes.lettersAndNumbersOnly, 'LettersAndNumbersOnly').trim().required(),
-  name: Joi.string().max(100).regex(Regexes.lettersNumbersAndSymbolsOnly, 'LettersNumbersAndSymbolsOnly').trim().required(),
-  address1: Joi.string().max(100).regex(Regexes.validAddress, 'ValidAddress').optional().allow(null),
-  address2: Joi.string().max(100).regex(Regexes.validAddress, 'ValidAddress').optional().allow(null),
-  city: Joi.string().max(50).regex(Regexes.lettersAndSymbolsOnly, 'LettersAndSymbolsOnly').optional().allow(null),
-  state: Joi.string().length(2).regex(Regexes.stateAbbreviations).optional().allow(null),
-  zipCode: Joi.string().min(5).max(10).regex(Regexes.validZipCode, 'ValidZipCode').optional().allow(null)
-};
+export class ClinicSchema {
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(9)
+  @Matches(Regexes.lettersAndNumbersOnly)
+  clinicId!: string;
 
-export const ClinicSchema = Joi.object(ClinicMap);
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(100)
+  @Matches(Regexes.lettersNumbersAndSymbolsOnly)
+  name!: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  @Matches(Regexes.validAddress)
+  address1!: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  @Matches(Regexes.validAddress)
+  address2!: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
+  @Matches(Regexes.lettersAndSymbolsOnly)
+  city!: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(2)
+  @Matches(Regexes.stateAbbreviations)
+  state!: string | null;
+
+  @IsOptional()
+  @IsString()
+  @Length(5, 10)
+  @Matches(Regexes.validZipCode)
+  zipCode!: string | null;
+
+  get allowableFields() {
+    return [
+      'clinicId',
+      'name',
+      'address1',
+      'address2',
+      'city',
+      'state',
+      'zipCode',
+    ];
+  }
+}

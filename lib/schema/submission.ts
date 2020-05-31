@@ -1,9 +1,28 @@
-import * as Joi from '@hapi/joi';
+import { IsString, MaxLength, Validate, IsOptional } from 'class-validator';
 
-export const SubmissionMap = {
-  attribute: Joi.string().max(255).trim().required(), // composite candidate key
-  value: Joi.string().max(255).allow(null).empty(''),
-  scope: Joi.string().max(255).allow(null).empty('')
-};
+import { RequiredString } from '../custom-validators';
 
-export const SubmissionSchema = Joi.object(SubmissionMap);
+export class SubmissionSchema {
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(255)
+  attribute!: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  value!: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  scope!: string | null;
+
+  get allowableFields() {
+    return [
+      'attribute',
+      'value',
+      'scope',
+    ];
+  }
+}

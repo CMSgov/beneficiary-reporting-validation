@@ -1,110 +1,90 @@
-import * as Joi from '@hapi/joi';
 import { BeneficiarySchema } from '../lib/schema/beneficiary';
+import { ValidateSchema } from '../lib';
 
 describe('BeneficiarySchema', () => {
   describe('gender', () => {
     it('should validate correctly for MALE', () => {
-      const result = Joi.validate({
+      const result = ValidateSchema<BeneficiarySchema>({
         firstName: 'Joe',
         lastName: 'Doe',
         gender: 'MALE',
         dateOfBirth: Date.now().toString()
       }, BeneficiarySchema);
-      expect(result.error).toBeNull();
+      expect(result.valid).toBeTruthy();
     });
 
     it('should validate correctly for FEMALE', () => {
-      const result = Joi.validate({
+      const result = ValidateSchema<BeneficiarySchema>({
         firstName: 'Joe',
         lastName: 'Doe',
-        gender: 'MALE',
+        gender: 'FEMALE',
         dateOfBirth: Date.now().toString()
       }, BeneficiarySchema);
-      expect(result.error).toBeNull();
+      expect(result.valid).toBeTruthy();
     });
 
     it('should validate correctly for UNKNOWN', () => {
-      const result = Joi.validate({
+      const result = ValidateSchema<BeneficiarySchema>({
         firstName: 'Joe',
         lastName: 'Doe',
-        gender: 'MALE',
+        gender: 'UNKNOWN',
         dateOfBirth: Date.now().toString()
       }, BeneficiarySchema);
-      expect(result.error).toBeNull();
+      expect(result.valid).toBeTruthy();
     });
 
     it('should validate correctly for empty string', () => {
-      const result = Joi.validate({
-        firstName: 'Joe',
-        lastName: 'Doe',
-        gender: '',
-        dateOfBirth: Date.now().toString()
-      }, BeneficiarySchema);
-      expect(result.error).not.toBeNull();
-    });
-
-    it('should validate correctly for whitespace string', () => {
-      const result = Joi.validate({
+      const result = ValidateSchema<BeneficiarySchema>({
         firstName: 'Joe',
         lastName: 'Doe',
         gender: ' ',
         dateOfBirth: Date.now().toString()
       }, BeneficiarySchema);
-      expect(result.error).not.toBeNull();
+      expect(result.valid).toBeFalsy();
     });
   });
 });
 
 describe('BeneficiarySchema', () => {
-  it('should validate correctly', () => {
-    const result = Joi.validate({
-      firstName: 'Joe.',
-      lastName: 'Doe.',
-      gender: 'MALE',
-      dateOfBirth: Date.now().toString()
-    }, BeneficiarySchema);
-    expect(result.error).toBeNull();
-  });
-
   it('should allow partial objects', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe'
     }, BeneficiarySchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null firstName', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       firstName: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should allow null lastName', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       lastName: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should allow null dateOfBirth', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       dateOfBirth: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should allow null gender', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       gender: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow unknown fields', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       skippedReason: 'some reason'
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 });

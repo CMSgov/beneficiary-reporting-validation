@@ -1,41 +1,41 @@
-import * as Joi from '@hapi/joi';
 import { SubmissionSchema } from '../lib/schema/submission';
+import { ValidateSchema } from '../lib';
 
 describe('SubmissionSchema', () => {
   it('should validate correctly', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<SubmissionSchema>({
       attribute: 'attriute string',
       value: 'value',
       scope: 'scope value'
     }, SubmissionSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null value:', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<SubmissionSchema>({
       value: null,
     }, SubmissionSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should allow null scope', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<SubmissionSchema>({
       scope: null
     }, SubmissionSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow unknown fields', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<SubmissionSchema>({
       someRandomProp: 'should not work'
     }, SubmissionSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow empty value for attribute', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<SubmissionSchema>({
       attribute: ' '
     }, SubmissionSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 });

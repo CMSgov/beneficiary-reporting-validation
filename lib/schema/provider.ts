@@ -1,13 +1,51 @@
-import * as Joi from '@hapi/joi';
+import { IsString, IsNotEmpty, IsInt,  MaxLength, Validate, Matches, IsOptional } from 'class-validator';
+
+import { RequiredString } from '../custom-validators';
 import { Regexes } from '../regexes';
 
-export const ProviderMap = {
-  npi: Joi.string().max(10).regex(Regexes.numbersOnly).trim().required(),
-  firstName: Joi.string().max(50).regex(Regexes.lettersAndSymbolsOnly).trim().required(),
-  lastName: Joi.string().max(50).regex(Regexes.lettersAndSymbolsOnly).trim().required(),
-  ein: Joi.string().max(15).regex(Regexes.lettersAndNumbersOnly).optional().allow(null),
-  credentials: Joi.string().max(128).regex(Regexes.validCredentials).optional().allow(null),
-  organizationId: Joi.number().required()
-};
+export class ProviderSchema {
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(10)
+  @Matches(Regexes.numbersOnly)
+  npi!: string;
 
-export const ProviderSchema = Joi.object(ProviderMap);
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(50)
+  @Matches(Regexes.lettersAndSymbolsOnly)
+  firstName!: string;
+
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(50)
+  @Matches(Regexes.lettersAndSymbolsOnly)
+  lastName!: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(15)
+  @Matches(Regexes.lettersAndNumbersOnly)
+  ein!: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(128)
+  @Matches(Regexes.validCredentials)
+  credentials!: string | null;
+
+  @IsNotEmpty()
+  @IsInt()
+  organizationId!: number;
+
+  get allowableFields() {
+    return [
+      'npi',
+      'firstName',
+      'lastName',
+      'ein',
+      'credentials',
+      'organizationId',
+    ];
+  }
+}

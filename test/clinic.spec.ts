@@ -1,9 +1,9 @@
-import * as Joi from '@hapi/joi';
 import { ClinicSchema } from '../lib/schema/clinic';
+import { ValidateSchema } from '../lib';
 
 describe('ClinicSchema', () => {
-  it('should validate correctly', () => {
-    const result = Joi.validate({
+  it('should validate correctly', async () => {
+    const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic Name',
       address1: null,
@@ -12,70 +12,97 @@ describe('ClinicSchema', () => {
       state: 'PA',
       zipCode: '12345'
     }, ClinicSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
-  it('should allow partial objects', () => {
-    const result = Joi.validate({
+  it('should allow partial objects with required fields', async () => {
+    const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic'
     }, ClinicSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null address1', () => {
-    const result = Joi.validate({
+  it('should allow null address1', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: '123456789',
+      name: 'Clinic',
       address1: null,
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null address2', () => {
-    const result = Joi.validate({
-      address2: null
+  it('should allow null address2', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: '123456789',
+      name: 'Clinic',
+      address2: null,
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null city', () => {
-    const result = Joi.validate({
-      city: null
+  it('should allow null city', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: '123456789',
+      name: 'Clinic',
+      city: null,
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null state', () => {
-    const result = Joi.validate({
-      state: null
+  it('should allow null state', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: '123456789',
+      name: 'Clinic',
+      state: null,
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null zipCode', () => {
-    const result = Joi.validate({
-      zipCode: null
+  it('should allow null zipCode', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: '123456789',
+      name: 'Clinic',
+      zipCode: null,
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
-  it('should not allow unknown fields', () => {
-    const result = Joi.validate({
-      someRandomProp: 'should not work'
+  it('should not allow unknown fields', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: '123456789',
+      name: 'Clinic',
+      someRandomProp: 'should not work',
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
-  it('should not allow empty value for clinicId', () => {
-    const result = Joi.validate({
-      clinicId: ' '
+  it('should not allow empty value for clinicId', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: ' ',
+      name: 'Clinic',
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    console.log(result)
+    expect(result.valid).toBeFalsy();
   });
 
-  it('should not allow empty value for name', () => {
-    const result = Joi.validate({
-      name: ' '
+  it('should not allow empty value for name', async () => {
+    const result = ValidateSchema<ClinicSchema>({
+      clinicId: '123456789',
+      name: ' ',
     }, ClinicSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should get allowable fields', async () => {
+    expect(new ClinicSchema().allowableFields).toEqual([
+      'clinicId',
+      'name',
+      'address1',
+      'address2',
+      'city',
+      'state',
+      'zipCode'
+    ]);
   });
 });

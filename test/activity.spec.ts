@@ -1,25 +1,25 @@
-import * as Joi from '@hapi/joi';
 import { ActivitySchema } from '../lib/schema/activity';
+import { ValidateSchema } from '../lib/index';
 
 describe('ActivitySchema', () => {
   it('should validate correctly', () => {
-    const result = Joi.validate({
-      action: 'SOME_ACTION'
+    const result = ValidateSchema<ActivitySchema>({
+      action: false // should be string
     }, ActivitySchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
-  it('should not allow empty value for action', () => {
-    const result = Joi.validate({
-      action: ''
+  it('should validate correctly', () => {
+    const result = ValidateSchema<ActivitySchema>({
+      action: ' ' // should not be empty also checking white space
     }, ActivitySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
-  it('should not allow unknown fields', () => {
-    const result = Joi.validate({
-      someRandomProp: 'should not work'
+  it('should validate correctly', () => {
+    const result = ValidateSchema<ActivitySchema>({
+      action: 'passes'
     }, ActivitySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 });

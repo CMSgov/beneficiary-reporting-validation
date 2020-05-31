@@ -1,5 +1,5 @@
-import * as Joi from '@hapi/joi';
 import { BeneficiaryComplexSchema } from '../lib/schema/beneficiary.complex';
+import { ValidateSchema } from '../lib';
 
 const goodMeasure = {
     name: "PREV-13",
@@ -28,57 +28,57 @@ const goodBene = {
 
 describe('BeneficiaryComplexSchema', () => {
   it('should validate correctly', () => {
-    const result = Joi.validate({
-        ...goodBene,
-        measures: [{
-            ...goodMeasure,
-            submissions: [{
-                ...goodSubmission
-            }]
+    const result = ValidateSchema<BeneficiaryComplexSchema>({
+      ...goodBene,
+      measures: [{
+        ...goodMeasure,
+        submissions: [{
+          ...goodSubmission
         }]
+      }]
     }, BeneficiaryComplexSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should fail validation if there are extra bene properties', () => {
-    const result = Joi.validate({
-        ...goodBene,
-        bogus: 'property',
-        measures: [{
-            ...goodMeasure,
-            submissions: [{
-                ...goodSubmission
-            }]
+    const result = ValidateSchema<BeneficiaryComplexSchema>({
+      ...goodBene,
+      bogus: 'property',
+      measures: [{
+        ...goodMeasure,
+        submissions: [{
+          ...goodSubmission
         }]
+      }]
     }, BeneficiaryComplexSchema);
-    expect(result.error).toBeTruthy();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should fail validation if there are extra measure properties', () => {
-    const result = Joi.validate({
-        ...goodBene,
-        measures: [{
-            bogus: 'property',
-            ...goodMeasure,
-            submissions: [{
-                ...goodSubmission
-            }]
+    const result = ValidateSchema<BeneficiaryComplexSchema>({
+      ...goodBene,
+      measures: [{
+        bogus: 'property',
+        ...goodMeasure,
+        submissions: [{
+          ...goodSubmission
         }]
+      }]
     }, BeneficiaryComplexSchema);
-    expect(result.error).toBeTruthy();
+    expect(result.valid).toBeFalsy();
   });
 
-  it.only('should fail validation if there are extra submission properties', () => {
-    const result = Joi.validate({
-        ...goodBene,
-        measures: [{
-            ...goodMeasure,
-            submissions: [{
-                bogus: 'property',
-                ...goodSubmission
-            }]
+  it('should fail validation if there are extra submission properties', () => {
+    const result = ValidateSchema<BeneficiaryComplexSchema>({
+      ...goodBene,
+      measures: [{
+        ...goodMeasure,
+        submissions: [{
+          bogus: 'property',
+          ...goodSubmission
         }]
+      }]
     }, BeneficiaryComplexSchema);
-    expect(result.error).toBeTruthy();
+    expect(result.valid).toBeFalsy();
   });
 });
