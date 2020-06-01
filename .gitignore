@@ -3,6 +3,7 @@ node_modules
 examples
 coverage
 build
+dist
 app
 typings
 

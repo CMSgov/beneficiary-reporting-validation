@@ -1,3 +1,8 @@
+export declare enum Gender {
+    Male = "MALE",
+    Female = "FEMALE",
+    Unknown = "UNKNOWN"
+}
 export declare class BeneficiarySchema {
     firstName: string;
     lastName: string;

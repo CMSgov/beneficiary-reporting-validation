@@ -47,7 +47,7 @@ describe('MeasureSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new MeasureSchema().allowableFields).toEqual([
       'name',
       'helpDeskTicket',
@@ -55,7 +55,7 @@ describe('MeasureSchema', () => {
     ]);
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new MeasureSchema().allowableFields).toEqual([
       'name',
       'helpDeskTicket',

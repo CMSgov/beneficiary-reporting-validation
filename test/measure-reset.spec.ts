@@ -23,7 +23,7 @@ describe('MeasureResetSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new MeasureResetSchema().allowableFields).toEqual([
       'measures',
       'confirmation',

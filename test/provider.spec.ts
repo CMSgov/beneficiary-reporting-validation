@@ -56,7 +56,7 @@ describe('ProviderSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new ProviderSchema().allowableFields).toEqual([
       'npi',
       'firstName',

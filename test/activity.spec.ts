@@ -23,7 +23,7 @@ describe('ActivitySchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new ActivitySchema().allowableFields).toEqual([
       'action',
     ]);

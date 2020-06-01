@@ -47,7 +47,7 @@ describe('RegistrationSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new RegistrationSchema().allowableFields).toEqual([
       'bsrRegistered',
       'cahpsRegistered',

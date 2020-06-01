@@ -102,7 +102,7 @@ describe('BeneficiarySchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new BeneficiarySchema().allowableFields).toEqual([
       'firstName',
       'lastName',

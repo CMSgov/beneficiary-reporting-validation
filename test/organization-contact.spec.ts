@@ -52,7 +52,7 @@ describe('OrganizationContactSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new OrganizationContactSchema().allowableFields).toEqual([
       'firstName',
       'lastName',

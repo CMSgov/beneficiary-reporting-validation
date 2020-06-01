@@ -39,7 +39,7 @@ describe('SubmissionSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new SubmissionSchema().allowableFields).toEqual([
       'attribute',
       'value',

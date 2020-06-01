@@ -1,7 +1,13 @@
-import { Validate, IsString, MaxLength, Matches, IsOptional, IsIn, IsDateString, IsInt, MinDate, MaxDate } from 'class-validator';
+import { Validate, IsString, MaxLength, Matches, IsOptional, IsInt, IsEnum } from 'class-validator';
 
 import { Regexes } from '../regexes';
 import { DateString, InDateRange } from '../custom-validators';
+
+export enum Gender {
+  Male = 'MALE',
+  Female = 'FEMALE',
+  Unknown = 'UNKNOWN',
+}
 
 export class BeneficiarySchema {
   @IsOptional()
@@ -18,7 +24,7 @@ export class BeneficiarySchema {
 
   @IsOptional()
   @IsString()
-  @IsIn(['MALE', 'FEMALE', 'UNKNOWN'])
+  @IsEnum(Gender)
   gender!: string;
 
   @IsOptional()

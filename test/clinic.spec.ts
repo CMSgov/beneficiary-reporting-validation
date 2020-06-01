@@ -2,7 +2,7 @@ import { ClinicSchema } from '../lib/schema/clinic';
 import { ValidateSchema } from '../lib';
 
 describe('ClinicSchema', () => {
-  it('should validate correctly', async () => {
+  it('should validate correctly', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic Name',
@@ -15,7 +15,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should allow partial objects with required fields', async () => {
+  it('should allow partial objects with required fields', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic'
@@ -23,7 +23,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null address1', async () => {
+  it('should allow null address1', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic',
@@ -32,7 +32,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null address2', async () => {
+  it('should allow null address2', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic',
@@ -41,7 +41,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null city', async () => {
+  it('should allow null city', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic',
@@ -50,7 +50,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null state', async () => {
+  it('should allow null state', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic',
@@ -59,7 +59,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should allow null zipCode', async () => {
+  it('should allow null zipCode', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic',
@@ -68,7 +68,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeTruthy();
   });
 
-  it('should not allow unknown fields', async () => {
+  it('should not allow unknown fields', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: 'Clinic',
@@ -77,7 +77,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should not allow empty value for clinicId', async () => {
+  it('should not allow empty value for clinicId', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: ' ',
       name: 'Clinic',
@@ -85,7 +85,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should not allow empty value for name', async () => {
+  it('should not allow empty value for name', () => {
     const result = ValidateSchema<ClinicSchema>({
       clinicId: '123456789',
       name: ' ',
@@ -93,7 +93,7 @@ describe('ClinicSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
-  it('should get allowable fields', async () => {
+  it('should get allowable fields', () => {
     expect(new ClinicSchema().allowableFields).toEqual([
       'clinicId',
       'name',
