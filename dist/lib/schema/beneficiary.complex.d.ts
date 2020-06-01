@@ -1,8 +1,7 @@
 import { BeneficiarySchema } from './beneficiary';
-import { MeasureSchema, SubmissionSchema } from './';
+import { MeasureSchema } from './';
 export declare class BeneficiaryComplexSchema extends BeneficiarySchema {
     id: number;
-    measures: MeasureSchema & {
-        submissions: SubmissionSchema[];
-    };
+    measures: MeasureSchema[];
+    get allowableFields(): string[];
 }

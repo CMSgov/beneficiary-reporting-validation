@@ -15,6 +15,10 @@ describe('OrganizationContactSchema', () => {
 
   it('should allow null phoneExtension', () => {
     const result = ValidateSchema<OrganizationContactSchema>({
+      firstName: 'First.',
+      lastName: 'Name.',
+      email: 'me@me.com',
+      phone: '1234567890',
       phoneExtension: null,
     }, OrganizationContactSchema);
     expect(result.valid).toBeTruthy();
@@ -24,27 +28,37 @@ describe('OrganizationContactSchema', () => {
     const result = ValidateSchema<OrganizationContactSchema>({
       someRandomProp: 'should not work'
     }, OrganizationContactSchema);
-    expect(result.valid).toBeTruthy();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow empty value for firstName', () => {
     const result = ValidateSchema<OrganizationContactSchema>({
       firstName: ' '
     }, OrganizationContactSchema);
-    expect(result.valid).toBeTruthy();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow empty value for lastName', () => {
     const result = ValidateSchema<OrganizationContactSchema>({
       lastName: ' '
     }, OrganizationContactSchema);
-    expect(result.valid).toBeTruthy();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow empty value for phone', () => {
     const result = ValidateSchema<OrganizationContactSchema>({
       phone: ' '
     }, OrganizationContactSchema);
-    expect(result.valid).toBeTruthy();
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should get allowable fields', async () => {
+    expect(new OrganizationContactSchema().allowableFields).toEqual([
+      'firstName',
+      'lastName',
+      'email',
+      'phone',
+      'phoneExtension',
+    ]);
   });
 });

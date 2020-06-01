@@ -5,4 +5,5 @@ export declare class ProviderSchema {
     ein: string | null;
     credentials: string | null;
     organizationId: number;
+    get allowableFields(): string[];
 }

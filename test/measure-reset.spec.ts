@@ -22,4 +22,11 @@ describe('MeasureResetSchema', () => {
     const result = ValidateSchema<MeasureResetSchema>([{ bad: 1 }], MeasureResetSchema);
     expect(result.valid).toBeFalsy();
   });
+
+  it('should get allowable fields', async () => {
+    expect(new MeasureResetSchema().allowableFields).toEqual([
+      'measures',
+      'confirmation',
+    ]);
+  });
 });

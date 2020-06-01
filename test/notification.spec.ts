@@ -33,4 +33,14 @@ describe('NotificationSchema', () => {
     }, NotificationSchema);
     expect(result.valid).toBeFalsy();
   });
+
+  it('should get allowable fields', async () => {
+    expect(new NotificationSchema().allowableFields).toEqual([
+      'userId',
+      'organizationId',
+      'messageType',
+      'message',
+      'read',
+    ]);
+  });
 });

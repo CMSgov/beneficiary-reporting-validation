@@ -39,9 +39,10 @@ function performAction<T extends SchemaFunctions>(type: ActionType, schema: new 
 
     let originalMethod = descriptor.value;
 
-    
     descriptor.value = function(...args: any[]) {
       let payloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyName);
+      // if there is no payload paramter then the decorator is not being used correctly
+      /* istanbul ignore else */
       if (payloadParameters) {
         for (let parameterIndex of payloadParameters) {
           if (parameterIndex >= args.length || args[parameterIndex] === undefined) {
@@ -57,7 +58,6 @@ function performAction<T extends SchemaFunctions>(type: ActionType, schema: new 
               }
               break;
             case ActionType.PickAllowableFields:
-              console.log(...new schema().allowableFields)
               args[parameterIndex] = pick(args[parameterIndex], ...new schema().allowableFields);
               break;
             // this will never be used

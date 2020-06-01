@@ -22,4 +22,10 @@ describe('ActivitySchema', () => {
     }, ActivitySchema);
     expect(result.valid).toBeTruthy();
   });
+
+  it('should get allowable fields', async () => {
+    expect(new ActivitySchema().allowableFields).toEqual([
+      'action',
+    ]);
+  });
 });

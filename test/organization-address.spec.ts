@@ -41,4 +41,15 @@ describe('OrganizationAddressSchema', () => {
     }, OrganizationAddressSchema);
     expect(result.valid).toBeFalsy();
   });
+
+  it('should get allowable fields', async () => {
+    expect(new OrganizationAddressSchema().allowableFields).toEqual([
+      'address1',
+      'address2',
+      'city',
+      'state',
+      'zipCode',
+      'isPrimary',
+    ]);
+  });
 });

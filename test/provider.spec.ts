@@ -55,4 +55,15 @@ describe('ProviderSchema', () => {
     }, ProviderSchema);
     expect(result.valid).toBeFalsy();
   });
+
+  it('should get allowable fields', async () => {
+    expect(new ProviderSchema().allowableFields).toEqual([
+      'npi',
+      'firstName',
+      'lastName',
+      'ein',
+      'credentials',
+      'organizationId',
+    ]);
+  });
 });

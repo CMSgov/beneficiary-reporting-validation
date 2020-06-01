@@ -5,4 +5,5 @@ export declare class OrganizationAddressSchema {
     state: string;
     zipCode: string;
     isPrimary: boolean;
+    get allowableFields(): string[];
 }

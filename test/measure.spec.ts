@@ -46,4 +46,20 @@ describe('MeasureSchema', () => {
     }, MeasureSchema);
     expect(result.valid).toBeFalsy();
   });
+
+  it('should get allowable fields', async () => {
+    expect(new MeasureSchema().allowableFields).toEqual([
+      'name',
+      'helpDeskTicket',
+      'comments',
+    ]);
+  });
+
+  it('should get allowable fields', async () => {
+    expect(new MeasureSchema().allowableFields).toEqual([
+      'name',
+      'helpDeskTicket',
+      'comments',
+    ]);
+  });
 });

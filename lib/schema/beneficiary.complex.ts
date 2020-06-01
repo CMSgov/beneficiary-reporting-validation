@@ -1,9 +1,9 @@
 import { IsInt, IsNotEmpty, IsArray, ValidateNested, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
+import 'reflect-metadata';
 
 import { BeneficiarySchema } from './beneficiary';
-import { MeasureSchema, SubmissionSchema } from './';
-
-type Measure = MeasureSchema & { submissions: SubmissionSchema[] };
+import { MeasureSchema } from './';
 
 export class BeneficiaryComplexSchema extends BeneficiarySchema {
   @IsNotEmpty()
@@ -13,7 +13,8 @@ export class BeneficiaryComplexSchema extends BeneficiarySchema {
   @ValidateNested()
   @IsOptional()
   @IsArray()
-  measures!: Measure[];
+  @Type(() => MeasureSchema)
+  measures!: MeasureSchema[];
 
   get allowableFields() {
     return [

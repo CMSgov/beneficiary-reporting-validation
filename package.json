@@ -7,8 +7,8 @@
     "api",
     "client"
   ],
-  "main": "build/wi-validation.js",
-  "types": "build/index.d.ts",
+  "main": "dist/wi-validation.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "test:cov": "jest --coverage",

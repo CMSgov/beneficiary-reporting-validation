@@ -6,4 +6,5 @@ export declare class ClinicSchema {
     city: string | null;
     state: string | null;
     zipCode: string | null;
+    get allowableFields(): string[];
 }

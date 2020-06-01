@@ -1,23 +1,28 @@
-import { IsString, MaxLength, Matches, IsOptional, IsIn, IsDateString, IsInt, MinDate, MaxDate } from 'class-validator';
+import { Validate, IsString, MaxLength, Matches, IsOptional, IsIn, IsDateString, IsInt, MinDate, MaxDate } from 'class-validator';
 
 import { Regexes } from '../regexes';
+import { DateString, InDateRange } from '../custom-validators';
 
 export class BeneficiarySchema {
+  @IsOptional()
   @IsString()
   @MaxLength(128)
   @Matches(Regexes.lettersAndSymbolsOnlyWithPeriod)
   firstName!: string;
 
+  @IsOptional()
   @IsString()
   @MaxLength(128)
   @Matches(Regexes.lettersAndSymbolsOnlyWithPeriod)
   lastName!: string;
-  
+
+  @IsOptional()
   @IsString()
   @IsIn(['MALE', 'FEMALE', 'UNKNOWN'])
   gender!: string;
 
-  @IsDateString()
+  @IsOptional()
+  @Validate(DateString)
   dateOfBirth!: string;
 
   @IsOptional()
@@ -39,9 +44,8 @@ export class BeneficiarySchema {
   medicalNotQualifiedReason!: string | null;
 
   @IsOptional()
-  @IsDateString()
-  @MinDate(new Date('2020-01-01'))
-  @MaxDate(new Date('2020-12-31'))
+  @Validate(DateString)
+  @Validate(InDateRange, ['2020-01-01','2020-12-31'])
   medicalNotQualifiedDate!: string | null;
 
   @IsOptional()

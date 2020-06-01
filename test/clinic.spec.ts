@@ -82,7 +82,6 @@ describe('ClinicSchema', () => {
       clinicId: ' ',
       name: 'Clinic',
     }, ClinicSchema);
-    console.log(result)
     expect(result.valid).toBeFalsy();
   });
 

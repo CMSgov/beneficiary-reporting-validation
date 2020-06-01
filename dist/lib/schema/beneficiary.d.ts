@@ -10,4 +10,5 @@ export declare class BeneficiarySchema {
     medicalNotQualifiedDate: string | null;
     clinicId: string | null;
     qualificationComments: string | null;
+    get allowableFields(): string[];
 }

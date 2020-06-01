@@ -4,4 +4,5 @@ export declare class NotificationSchema {
     messageType: string;
     message: string;
     read: boolean;
+    get allowableFields(): string[];
 }

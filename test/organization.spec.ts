@@ -39,6 +39,14 @@ describe('OrganizationSchema', () => {
     expect(result.valid).toBeFalsy();
   });
 
+  it('should get allowable fields', async () => {
+    expect(new OrganizationSchema().allowableFields).toEqual([
+      'name',
+      'nickname',
+      'groupSize',
+    ]);
+  });
+
   describe('groupSize()', () => {
     it('should validate correctly for 100+', () => {
       const result = ValidateSchema<OrganizationSchema>({

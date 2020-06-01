@@ -4,4 +4,5 @@ export declare class OrganizationContactSchema {
     email: string;
     phone: string;
     phoneExtension: string;
+    get allowableFields(): string[];
 }

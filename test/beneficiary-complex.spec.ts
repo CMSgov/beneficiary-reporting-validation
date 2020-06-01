@@ -21,7 +21,7 @@ const goodBene = {
     comments: "Some comments here",
     medicalRecordFound: "NO",
     medicalNotQualifiedReason: "IN_HOSPICE",
-    medicalNotQualifiedDate: "2007-11-06T00:00:00.000Z",
+    medicalNotQualifiedDate: new Date('2020-02-06').toISOString(),
     clinicId: 2536773,
     qualificationComments: "This is qualification comment",
 }
@@ -80,5 +80,51 @@ describe('BeneficiaryComplexSchema', () => {
       }]
     }, BeneficiaryComplexSchema);
     expect(result.valid).toBeFalsy();
+  });
+
+  it('should fail validation if there are bad nested values for measure', () => {
+    const result = ValidateSchema<BeneficiaryComplexSchema>({
+      ...goodBene,
+      measures: [{
+        ...goodMeasure,
+        helpDeskTicket: 'somelongertextthatshouldnotbeallowedbecauseitsmorethan15chars',
+        submissions: [{
+          ...goodSubmission
+        }]
+      }]
+    }, BeneficiaryComplexSchema);
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should fail validation if there are bad nested values for submission', () => {
+    const result = ValidateSchema<BeneficiaryComplexSchema>({
+      ...goodBene,
+      measures: [{
+        ...goodMeasure,
+        submissions: [{
+          ...goodSubmission,
+          attribute: 12345 // should be a string only
+        }]
+      }]
+    }, BeneficiaryComplexSchema);
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should get allowable fields', async () => {
+    expect(new BeneficiaryComplexSchema().allowableFields).toEqual([
+      'firstName',
+      'lastName',
+      'gender',
+      'dateOfBirth',
+      'mrn',
+      'comments',
+      'medicalRecordFound',
+      'medicalNotQualifiedReason',
+      'medicalNotQualifiedDate',
+      'clinicId',
+      'qualificationComments',
+      'id',
+      'measures'
+    ]);
   });
 });
