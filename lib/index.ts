@@ -15,7 +15,7 @@ export const ValidateSchema = function<T>(payload: any, schema: new () => T): Va
   }
 
   const errors = validateSync(plainToClass(schema, payload), {
-    validationError: { target: false },
+    validationError: { target: false, value: false },
     whitelist: true,
     forbidNonWhitelisted: true,
     forbidUnknownValues: true,

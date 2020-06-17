@@ -1,6 +1,11 @@
-import { IsInt, Max, IsNotEmpty, IsIn, Validate, MaxLength, IsBoolean } from 'class-validator';
+import { IsInt, Max, IsNotEmpty, IsEnum, Validate, MaxLength, IsBoolean } from 'class-validator';
 
 import { RequiredString } from '../custom-validators';
+
+export enum NotificationMessageTypes {
+  Error = 'ERROR',
+  Notification = 'NOTIFICATION'
+}
 
 export class NotificationSchema {
   @IsNotEmpty()
@@ -14,7 +19,7 @@ export class NotificationSchema {
   organizationId!: number;
 
   @IsNotEmpty()
-  @IsIn(['ERROR', 'NOTIFICATION'])
+  @IsEnum(NotificationMessageTypes)
   messageType!: string;
 
   @Validate(RequiredString)
