@@ -1,8 +1,21 @@
-import * as Joi from '@hapi/joi';
+import { IsNotEmpty, IsArray, IsBoolean, Validate } from 'class-validator';
 
-export const MeasureResetMap = {
-  measures: Joi.array().items(Joi.string()).required(),
-  confirmation: Joi.boolean().required()
-};
+import { IsArrayType } from '../custom-validators';
 
-export const MeasureResetSchema = Joi.object(MeasureResetMap);
+export class MeasureResetSchema {
+  @IsNotEmpty()
+  @IsArray()
+  @Validate(IsArrayType, ['string'])
+  measures!: string[];
+
+  @IsNotEmpty()
+  @IsBoolean()
+  confirmation!: boolean;
+
+  get allowableFields() {
+    return [
+      'measures',
+      'confirmation',
+    ];
+  }
+}

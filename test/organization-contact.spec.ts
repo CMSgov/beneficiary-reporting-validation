@@ -1,50 +1,64 @@
-import * as Joi from '@hapi/joi';
 import { OrganizationContactSchema } from '../lib/schema/organization-contact';
+import { ValidateSchema } from '../lib';
 
 describe('OrganizationContactSchema', () => {
   it('should validate correctly', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<OrganizationContactSchema>({
       firstName: 'First.',
       lastName: 'Name.',
       email: 'me@me.com',
       phone: '1234567890',
       phoneExtension: '123456'
     }, OrganizationContactSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null phoneExtension', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<OrganizationContactSchema>({
+      firstName: 'First.',
+      lastName: 'Name.',
+      email: 'me@me.com',
+      phone: '1234567890',
       phoneExtension: null,
     }, OrganizationContactSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should not allow unknown fields', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<OrganizationContactSchema>({
       someRandomProp: 'should not work'
     }, OrganizationContactSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow empty value for firstName', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<OrganizationContactSchema>({
       firstName: ' '
     }, OrganizationContactSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow empty value for lastName', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<OrganizationContactSchema>({
       lastName: ' '
     }, OrganizationContactSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow empty value for phone', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<OrganizationContactSchema>({
       phone: ' '
     }, OrganizationContactSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should get allowable fields', () => {
+    expect(new OrganizationContactSchema().allowableFields).toEqual([
+      'firstName',
+      'lastName',
+      'email',
+      'phone',
+      'phoneExtension',
+    ]);
   });
 });

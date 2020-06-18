@@ -1,16 +1,42 @@
-import * as Joi from '@hapi/joi';
+import { IsInt, Max, IsNotEmpty, IsEnum, Validate, MaxLength, IsBoolean } from 'class-validator';
+
+import { RequiredString } from '../custom-validators';
 
 export enum NotificationMessageTypes {
   Error = 'ERROR',
   Notification = 'NOTIFICATION'
 }
 
-export const NotificationMap = {
-  userId: Joi.number().max(99999999999).required(),
-  organizationId: Joi.number().max(99999999999).required(),
-  messageType: Joi.string().valid(Object.values(NotificationMessageTypes)).required(),
-  message: Joi.string().max(255).trim().required(),
-  read: Joi.boolean().required()
-};
+export class NotificationSchema {
+  @IsNotEmpty()
+  @IsInt()
+  @Max(99999999999)
+  userId!: number;
 
-export const NotificationSchema = Joi.object(NotificationMap);
+  @IsNotEmpty()
+  @IsInt()
+  @Max(99999999999)
+  organizationId!: number;
+
+  @IsNotEmpty()
+  @IsEnum(NotificationMessageTypes)
+  messageType!: string;
+
+  @Validate(RequiredString)
+  @MaxLength(255)
+  message!: string;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  read!: boolean;
+
+  get allowableFields() {
+    return [
+      'userId',
+      'organizationId',
+      'messageType',
+      'message',
+      'read',
+    ];
+  }
+}

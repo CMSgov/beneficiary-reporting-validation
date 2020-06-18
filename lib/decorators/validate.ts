@@ -1,8 +1,10 @@
 import 'reflect-metadata';
-import * as Joi from '@hapi/joi';
+
 import { ValidateSchema } from '..';
 
 const payloadMetadataKey = Symbol('payload');
+
+type SchemaFunctions = { readonly allowableFields: string[] };
 
 enum ActionType {
   Validate,
@@ -13,26 +15,21 @@ function pick(obj: { [key: string]: any }, ...keys: string[]): {} {
   return Object.assign({}, ...keys.map(prop => ({ [prop]: obj[prop] })));
 }
 
-function getAllowableFields(schemaType: Joi.Schema): string[] {
-  return Object.keys(Joi.describe(schemaType).children);
-}
-
 export function payload(target: Object, propertyKey: string | symbol, parameterIndex: number): void {
   let existingPayloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyKey) || [];
   existingPayloadParameters.push(parameterIndex);
   Reflect.defineMetadata(payloadMetadataKey, existingPayloadParameters, target, propertyKey);
 }
 
-export function Validate(schemaType: Joi.Schema): MethodDecorator {
-  return performAction(ActionType.Validate, schemaType);
+export function Validate<T extends SchemaFunctions>(schema: new () => T): MethodDecorator {
+  return performAction(ActionType.Validate, schema);
 }
 
-export const PickAllowableFields = function(schemaType: Joi.Schema): MethodDecorator {
-  return performAction(ActionType.PickAllowableFields, schemaType);
+export const PickAllowableFields = function<T extends SchemaFunctions>(schema: new () => T): MethodDecorator {
+  return performAction(ActionType.PickAllowableFields, schema);
 }
 
-
-function performAction(type: ActionType, schemaType: Joi.Schema) {
+function performAction<T extends SchemaFunctions>(type: ActionType, schema: new () => T) {
   return function(target: any, propertyName: string | symbol, descriptor: PropertyDescriptor) {
     // typescript makes this branch nearly impossible to test
     /* istanbul ignore next */
@@ -44,21 +41,24 @@ function performAction(type: ActionType, schemaType: Joi.Schema) {
 
     descriptor.value = function(...args: any[]) {
       let payloadParameters: number[] = Reflect.getOwnMetadata(payloadMetadataKey, target, propertyName);
+      // if there is no payload paramter then the decorator is not being used correctly
+      /* istanbul ignore else */
       if (payloadParameters) {
         for (let parameterIndex of payloadParameters) {
           if (parameterIndex >= args.length || args[parameterIndex] === undefined) {
             throw new Error('Missing payload.');
           }
 
+
           switch (type) {
             case ActionType.Validate:
-              const validation = ValidateSchema(args[parameterIndex], schemaType);
-              if (validation && validation.valid === false && validation.error != null) {
+              const validation = ValidateSchema<T>(args[parameterIndex], schema);
+              if (validation && !validation.valid && validation.error != null) {
                 throw new Error(`Request was invalid: ${validation.error.code} ${validation.error.message}`);
               }
               break;
             case ActionType.PickAllowableFields:
-              args[parameterIndex] = pick(args[parameterIndex], ...getAllowableFields(schemaType));
+              args[parameterIndex] = pick(args[parameterIndex], ...new schema().allowableFields);
               break;
             // this will never be used
             /* istanbul ignore next */
@@ -71,5 +71,4 @@ function performAction(type: ActionType, schemaType: Joi.Schema) {
       return originalMethod.apply(this, args);
     }
   }
-
 }

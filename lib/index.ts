@@ -1,5 +1,5 @@
-import * as Joi from '@hapi/joi';
-
+import { validateSync } from 'class-validator';
+import { plainToClass } from 'class-transformer';
 
 export interface ValidationResult {
   valid: boolean;
@@ -9,15 +9,25 @@ export interface ValidationResult {
   }
 }
 
-export const ValidateSchema = function (payload: any, schemaType: Joi.Schema): ValidationResult {
-  if (typeof payload !== 'object' || payload === null) {
-    return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload was supplied.' } }
+export const ValidateSchema = function<T>(payload: any, schema: new () => T): ValidationResult {
+  if (!(schema instanceof Object) || typeof payload !== 'object' || payload === null) {
+    return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload or schemaType was supplied.' } }
   }
 
-  const result = Joi.validate(payload, schemaType);
-
-  if (result.error != null) {
-    return { valid: false, error: { code: 422, message: `Request was invalid: ${result.error}` } }
+  const errors = validateSync(plainToClass(schema, payload), {
+    validationError: { target: false, value: false },
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    forbidUnknownValues: true,
+  });
+  if (errors.length > 0) {
+    return {
+      valid: false,
+      error: {
+        code: 422,
+        message: `Request was invalid: ${JSON.stringify(errors)}`
+      }
+    }
   }
 
   return { valid: true };

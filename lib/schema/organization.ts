@@ -1,4 +1,6 @@
-import * as Joi from '@hapi/joi';
+import { IsOptional, Validate, MaxLength, Matches, IsString, IsEnum } from 'class-validator';
+
+import { RequiredString } from '../custom-validators';
 import { Regexes } from '../regexes';
 
 export enum GroupSize {
@@ -7,10 +9,28 @@ export enum GroupSize {
   TwoTwentyFour = '2 - 24 Individual Eligible Clinicians'
 }
 
-export const OrganizationMap = {
-  name: Joi.string().max(128).trim().required(),
-  nickname: Joi.string().max(128).regex(Regexes.containsNonWhitespace, 'ContainsNonWhitespace').allow(null),
-  groupSize: Joi.string().valid(Object.values(GroupSize))
-};
+export class OrganizationSchema {
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(128)
+  name!: string;
 
-export const OrganizationSchema = Joi.object(OrganizationMap);
+  @IsOptional()
+  @Matches(Regexes.containsNonWhitespace)
+  @IsString()
+  @MaxLength(128)
+  nickname!: string;
+
+  @IsOptional()
+  @IsString()
+  @IsEnum(GroupSize)
+  groupSize!: string;
+
+  get allowableFields() {
+    return [
+      'name',
+      'nickname',
+      'groupSize',
+    ];
+  }
+}

@@ -1,48 +1,65 @@
-import * as Joi from '@hapi/joi';
 import { MeasureSchema } from '../lib/schema/measure';
+import { ValidateSchema } from '../lib';
 
 describe('MeasureSchema', () => {
   it('should validate correctly', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureSchema>({
       name: 'Measure Name',
       helpDeskTicket: '1234567',
       comments: 'comments'
     }, MeasureSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow partial objects', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureSchema>({
       name: 'New name',
     }, MeasureSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null helpDeskTicket', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureSchema>({
       helpDeskTicket: null,
     }, MeasureSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should allow null comments', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureSchema>({
       comments: null
     }, MeasureSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow unknown fields', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureSchema>({
       someRandomProp: 'should not work'
     }, MeasureSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
+
   });
 
   it('should not allow empty value for name', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureSchema>({
       name: ' '
     }, MeasureSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should get allowable fields', () => {
+    expect(new MeasureSchema().allowableFields).toEqual([
+      'name',
+      'helpDeskTicket',
+      'comments',
+    ]);
+  });
+
+  it('should get allowable fields', () => {
+    expect(new MeasureSchema().allowableFields).toEqual([
+      'name',
+      'helpDeskTicket',
+      'comments',
+    ]);
   });
 });

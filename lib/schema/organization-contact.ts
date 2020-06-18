@@ -1,12 +1,46 @@
-import * as Joi from '@hapi/joi';
+import { IsOptional, Validate, MaxLength, Matches, IsString } from 'class-validator';
+
+import { RequiredString } from '../custom-validators';
 import { Regexes } from '../regexes';
 
-export const OrganizationContactMap = {
-  firstName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnlyWithPeriod).trim().required(),
-  lastName: Joi.string().max(32).regex(Regexes.lettersAndSymbolsOnlyWithPeriod).trim().required(),
-  email: Joi.string().max(100).regex(Regexes.email).required(),
-  phone: Joi.string().length(10).regex(Regexes.numbersOnly).trim().required(),
-  phoneExtension: Joi.string().max(6).regex(Regexes.numbersOnly).optional().allow(null)
-};
+export class OrganizationContactSchema {
+  @Validate(RequiredString)
+  @Matches(Regexes.lettersAndSymbolsOnlyWithPeriod)
+  @IsString()
+  @MaxLength(32)
+  firstName!: string;
 
-export const OrganizationContactSchema = Joi.object(OrganizationContactMap);
+  @Validate(RequiredString)
+  @Matches(Regexes.lettersAndSymbolsOnlyWithPeriod)
+  @IsString()
+  @MaxLength(32)
+  lastName!: string;
+
+  @Validate(RequiredString)
+  @Matches(Regexes.email)
+  @IsString()
+  @MaxLength(100)
+  email!: string;
+
+  @Validate(RequiredString)
+  @Matches(Regexes.numbersOnly)
+  @IsString()
+  @MaxLength(10)
+  phone!: string;
+
+  @IsOptional()
+  @Matches(Regexes.numbersOnly)
+  @IsString()
+  @MaxLength(6)
+  phoneExtension!: string;
+
+  get allowableFields() {
+    return [
+      'firstName',
+      'lastName',
+      'email',
+      'phone',
+      'phoneExtension',
+    ];
+  }
+}

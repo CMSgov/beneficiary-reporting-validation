@@ -1,5 +1,5 @@
 import { Validate, PickAllowableFields, payload } from '../lib/decorators';
-import { MockSchema, validModel, invalidModel } from './mocks/mock-schema';
+import { MockSchema, validModel, invalidModel, invalidModelTwo } from './mocks/mock-schema';
 
 describe('Decorators', () => {
 
@@ -22,14 +22,18 @@ describe('Decorators', () => {
       fixture = new Fixture();
     });
 
-    it('should return if the payload validates', () => {
+    it('should return valid if the payload validates', () => {
       const result = fixture.validateFunc(validModel);
       expect(() => fixture.validateFunc(validModel)).not.toThrow();
       expect(result).toEqual(validModel);
     });
 
-    it('should throw if the payload does not validate', () => {
+    it('should throw if the payload does not validate - unknown prop', () => {
       expect(() => fixture.validateFunc(invalidModel)).toThrow();
+    });
+
+    it('should throw if the payload does not validate - bad values', () => {
+      expect(() => fixture.validateFunc(invalidModelTwo)).toThrow();
     });
 
     it('should throw if the payload does not exist', () => {

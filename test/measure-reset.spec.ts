@@ -1,27 +1,32 @@
-import * as Joi from '@hapi/joi';
 import { MeasureResetSchema } from '../lib/schema/measure-reset';
+import { ValidateSchema } from '../lib';
 
 describe('MeasureResetSchema', () => {
   it('should validate correctly', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureResetSchema>({
       measures:['CARE-1', 'CARE-2', 'PREV-10'],
       confirmation: false
     }, MeasureResetSchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should not allow non string values in array', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<MeasureResetSchema>({
       measures: [1, 2, 'CARE-1'],
       confirmation: false
     }, MeasureResetSchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
   });
 
   it('should not allow non object type', () => {
-    const result = Joi.validate([
-      { bad: 1 }
-    ], MeasureResetSchema);
-    expect(result.error).not.toBeNull();
+    const result = ValidateSchema<MeasureResetSchema>([{ bad: 1 }], MeasureResetSchema);
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should get allowable fields', () => {
+    expect(new MeasureResetSchema().allowableFields).toEqual([
+      'measures',
+      'confirmation',
+    ]);
   });
 });

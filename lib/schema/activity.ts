@@ -1,7 +1,13 @@
-import * as Joi from '@hapi/joi';
+import { IsString, Validate } from 'class-validator';
 
-export const ActivityMap = {
-  action: Joi.string().required()
-};
+import { RequiredString } from '../custom-validators';
 
-export const ActivitySchema = Joi.object(ActivityMap);
+export class ActivitySchema {
+  @Validate(RequiredString)
+  @IsString()
+  action!: string;
+
+  get allowableFields() {
+    return ['action'];
+  }
+}

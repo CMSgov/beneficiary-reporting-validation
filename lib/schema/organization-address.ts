@@ -1,13 +1,50 @@
-import * as Joi from '@hapi/joi';
+import { IsNotEmpty, IsBoolean, IsOptional, Validate, MaxLength, Length, Matches, IsString } from 'class-validator';
+
+import { RequiredString } from '../custom-validators';
 import { Regexes } from '../regexes';
 
-export const OrganizationAddressMap = {
-  address1: Joi.string().max(128).regex(Regexes.validAddress).trim().required(),
-  address2: Joi.string().max(128).regex(Regexes.validAddress).optional().allow(null),
-  city: Joi.string().max(128).trim().required(),
-  state: Joi.string().length(2).regex(Regexes.stateAbbreviations).required(),
-  zipCode: Joi.string().min(5).max(10).regex(Regexes.validZipCode).required(),
-  isPrimary: Joi.boolean().required()
-};
+export class OrganizationAddressSchema {
+  @Validate(RequiredString)
+  @Matches(Regexes.validAddress)
+  @IsString()
+  @MaxLength(128)
+  address1!: string;
 
-export const OrganizationAddressSchema = Joi.object(OrganizationAddressMap);
+  @IsOptional()
+  @Matches(Regexes.validAddress)
+  @IsString()
+  @MaxLength(128)
+  address2!: string;
+
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(128)
+  city!: string;
+
+  @Validate(RequiredString)
+  @IsString()
+  @MaxLength(2)
+  @Matches(Regexes.stateAbbreviations)
+  state!: string;
+
+  @Validate(RequiredString)
+  @IsString()
+  @Length(5, 10)
+  @Matches(Regexes.validZipCode)
+  zipCode!: string;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  isPrimary!: boolean;
+
+  get allowableFields() {
+    return [
+      'address1',
+      'address2',
+      'city',
+      'state',
+      'zipCode',
+      'isPrimary',
+    ];
+  }
+}

@@ -1,110 +1,120 @@
-import * as Joi from '@hapi/joi';
 import { BeneficiarySchema } from '../lib/schema/beneficiary';
+import { ValidateSchema } from '../lib';
 
 describe('BeneficiarySchema', () => {
-  describe('gender', () => {
-    it('should validate correctly for MALE', () => {
-      const result = Joi.validate({
-        firstName: 'Joe',
-        lastName: 'Doe',
-        gender: 'MALE',
-        dateOfBirth: Date.now().toString()
-      }, BeneficiarySchema);
-      expect(result.error).toBeNull();
-    });
-
-    it('should validate correctly for FEMALE', () => {
-      const result = Joi.validate({
-        firstName: 'Joe',
-        lastName: 'Doe',
-        gender: 'MALE',
-        dateOfBirth: Date.now().toString()
-      }, BeneficiarySchema);
-      expect(result.error).toBeNull();
-    });
-
-    it('should validate correctly for UNKNOWN', () => {
-      const result = Joi.validate({
-        firstName: 'Joe',
-        lastName: 'Doe',
-        gender: 'MALE',
-        dateOfBirth: Date.now().toString()
-      }, BeneficiarySchema);
-      expect(result.error).toBeNull();
-    });
-
-    it('should validate correctly for empty string', () => {
-      const result = Joi.validate({
-        firstName: 'Joe',
-        lastName: 'Doe',
-        gender: '',
-        dateOfBirth: Date.now().toString()
-      }, BeneficiarySchema);
-      expect(result.error).not.toBeNull();
-    });
-
-    it('should validate correctly for whitespace string', () => {
-      const result = Joi.validate({
-        firstName: 'Joe',
-        lastName: 'Doe',
-        gender: ' ',
-        dateOfBirth: Date.now().toString()
-      }, BeneficiarySchema);
-      expect(result.error).not.toBeNull();
-    });
-  });
-});
-
-describe('BeneficiarySchema', () => {
-  it('should validate correctly', () => {
-    const result = Joi.validate({
-      firstName: 'Joe.',
-      lastName: 'Doe.',
+  it('should validate correctly for MALE', () => {
+    const result = ValidateSchema<BeneficiarySchema>({
+      firstName: 'Joe',
+      lastName: 'Doe',
       gender: 'MALE',
-      dateOfBirth: Date.now().toString()
+      dateOfBirth: '1956-06-06',
     }, BeneficiarySchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
+  });
+
+  it('should validate correctly for FEMALE', () => {
+    const result = ValidateSchema<BeneficiarySchema>({
+      firstName: 'Joe',
+      lastName: 'Doe',
+      gender: 'FEMALE',
+      dateOfBirth: '1956-06-06'
+    }, BeneficiarySchema);
+    expect(result.valid).toBeTruthy();
+  });
+
+  it('should validate correctly for UNKNOWN', () => {
+    const result = ValidateSchema<BeneficiarySchema>({
+      firstName: 'Joe',
+      lastName: 'Doe',
+      gender: 'UNKNOWN',
+      dateOfBirth: '1956-06-06'
+    }, BeneficiarySchema);
+    expect(result.valid).toBeTruthy();
+  });
+
+  it('should validate correctly for empty string', () => {
+    const result = ValidateSchema<BeneficiarySchema>({
+      firstName: 'Joe',
+      lastName: 'Doe',
+      gender: ' ',
+      dateOfBirth: '1956-06-06'
+    }, BeneficiarySchema);
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should validate correctly for out of range medicalNotQualifiedDate', () => {
+    const result = ValidateSchema<BeneficiarySchema>({
+      firstName: 'Joe',
+      lastName: 'Doe',
+      medicalNotQualifiedDate: new Date('2019-02-04').toISOString(),
+    }, BeneficiarySchema);
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should validate correctly for out in range medicalNotQualifiedDate', () => {
+    const result = ValidateSchema<BeneficiarySchema>({
+      firstName: 'Joe',
+      lastName: 'Doe',
+      medicalNotQualifiedDate: new Date('2020-02-04').toISOString(),
+    }, BeneficiarySchema);
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow partial objects', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe'
     }, BeneficiarySchema);
-    expect(result.error).toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null firstName', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       firstName: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null lastName', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       lastName: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null dateOfBirth', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       dateOfBirth: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should allow null gender', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       gender: null
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeTruthy();
   });
 
   it('should not allow unknown fields', () => {
-    const result = Joi.validate({
+    const result = ValidateSchema<BeneficiarySchema>({
       skippedReason: 'some reason'
     }, BeneficiarySchema);
-    expect(result.error).not.toBeNull();
+    expect(result.valid).toBeFalsy();
+  });
+
+  it('should get allowable fields', () => {
+    expect(new BeneficiarySchema().allowableFields).toEqual([
+      'firstName',
+      'lastName',
+      'gender',
+      'dateOfBirth',
+      'mrn',
+      'comments',
+      'medicalRecordFound',
+      'medicalNotQualifiedReason',
+      'medicalNotQualifiedDate',
+      'clinicId',
+      'qualificationComments',
+    ]);
   });
 });
