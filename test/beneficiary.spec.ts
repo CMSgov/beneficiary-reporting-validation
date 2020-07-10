@@ -46,16 +46,25 @@ describe('BeneficiarySchema', () => {
     const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe',
       lastName: 'Doe',
-      medicalNotQualifiedDate: new Date('2019-02-04').toISOString(),
+      medicalNotQualifiedDate: '2019-02-04',
     }, BeneficiarySchema);
     expect(result.valid).toBeFalsy();
   });
 
-  it('should validate correctly for out in range medicalNotQualifiedDate', () => {
+  it('should validate correctly for out in range medicalNotQualifiedDate with MM-DD-YYYY', () => {
     const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe',
       lastName: 'Doe',
-      medicalNotQualifiedDate: new Date('2020-02-04').toISOString(),
+      medicalNotQualifiedDate: '02-04-2020',
+    }, BeneficiarySchema);
+    expect(result.valid).toBeTruthy();
+  });
+
+  it('should validate correctly for out in range medicalNotQualifiedDate with YYYY-MM-DD', () => {
+    const result = ValidateSchema<BeneficiarySchema>({
+      firstName: 'Joe',
+      lastName: 'Doe',
+      medicalNotQualifiedDate: '2020-02-04',
     }, BeneficiarySchema);
     expect(result.valid).toBeTruthy();
   });

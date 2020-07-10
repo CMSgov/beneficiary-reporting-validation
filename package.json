@@ -1,6 +1,6 @@
 {
   "name": "@cmsgov/wi-validation",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.0",
   "description": "CMS Web Interface Client and API Validation",
   "keywords": [
     "validation",
