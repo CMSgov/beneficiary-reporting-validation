@@ -46,8 +46,6 @@ This package can be used to validate endpoint payloads against our schemas.
 
 All schemas can be found here [All Schemas](https://github.com/CMSgov/beneficiary-reporting-validation/tree/master/lib/schema)
 
-- [ClinicSchema](https://github.com/CMSgov/beneficiary-reporting-validation/blob/master/lib/schema/clinic.ts)
-
 ## Regexes & Usage
 
 Available regexes can be found here [Available Regexes](https://github.com/CMSgov/beneficiary-reporting-validation/blob/master/lib/regexes.ts)
@@ -63,6 +61,7 @@ Available regexes can be found here [Available Regexes](https://github.com/CMSgo
 We utilize github actions to assist with the publishing process. The following steps will publish a release to npm and send notifications to the WI client and api repos.
 
 1) Create a release in github.
+  - Choose the master branch (make sure you've merged necessary code)
   - The tag should be the version being publish, ex: `1.2.2`
   - The name should be `Release - VERSION_NUMBER` ex: `Release - 1.2.2`
   - Description - Provide details about what is changing, and whether there are breaking changes.
