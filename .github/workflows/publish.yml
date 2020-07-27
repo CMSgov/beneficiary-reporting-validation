@@ -53,7 +53,7 @@ jobs:
           token: ${{ secrets.GH_USER_TOKEN }}
           repository: ${{ matrix.repo }}
           event-type: lib-update-event
-          client-payload: '{"ref": "${{ github.ref }}", "private_package": "@CMSgov/beneficiary-reporting-validation", "public_package":"beneficiary-reporting-validation" ,"tag_name": "${{ github.event.release.tag_name }}", "html_url": "${{github.event.release.html_url}}"}'
+          client-payload: '{"ref": "${{ github.ref }}", "private_package": "@cmsgov/wi-validation", "public_package":"@cmsgov/wi-validation" ,"tag_name": "${{ github.event.release.tag_name }}", "html_url": "${{github.event.release.html_url}}"}'
 
   notify-slack:
     runs-on: ubuntu-latest
