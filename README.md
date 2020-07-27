@@ -58,6 +58,13 @@ Available regexes can be found here [Available Regexes](https://github.com/CMSgo
   const test = Regexes.lettersAndSymbolsOnly.test(value);
 ```
 
-## Note
+## Publishing
 
-Currently, `@hapi/joi` dependency is included in the webpack bundle due to it’s lack of native support for browsers
+We utilize github actions to assist with the publishing process. The following steps will publish a release to npm and send notifications to the WI client and api repos.
+
+1) Create a release in github.
+  - The tag should be the version being publish, ex: `1.2.2`
+  - The name should be `Release - VERSION_NUMBER` ex: `Release - 1.2.2`
+  - Description - Provide details about what is changing, and whether there are breaking changes.
+2) Publish
+3) Confirm the latest published version is correct in npm and check API/Client repos for auto generated PRs.
