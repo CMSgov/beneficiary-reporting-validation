@@ -67,3 +67,18 @@ We utilize github actions to assist with the publishing process. The following s
   - Description - Provide details about what is changing, and whether there are breaking changes.
 2) Publish
 3) Confirm the latest published version is correct in npm and check API/Client repos for auto generated PRs.
+
+## Want to Contribute?
+
+Want to file a bug or contribute some code? Read up on our guidelines for [contributing].
+
+[contributing]: /.github/CONTRIBUTING.md
+
+## Public Domain
+This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived
+through the CC0 1.0 Universal public domain dedication.		
+
+All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to
+comply with this waiver of copyright interest.		
+
+See the [formal LICENSE file](/LICENSE).
