@@ -62,7 +62,7 @@ We utilize github actions to assist with the publishing process. The following s
 
 1) Create a release in github.
   - Choose the master branch (make sure you've merged necessary code)
-  - The tag should be the version being publish, ex: `1.2.2`
+  - The tag should be the version being publish prefixed with "v", ex: `v1.2.2`
   - The name should be `Release - VERSION_NUMBER` ex: `Release - 1.2.2`
   - Description - Provide details about what is changing, and whether there are breaking changes.
 2) Publish
