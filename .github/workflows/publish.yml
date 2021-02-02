@@ -1,12 +1,6 @@
 name: Beneficiary Reporting Validation - Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      recordTag:
-        description: 'Tag'     
-        required: true
-        default: 'manual-run-from github'
   release:
     types: [published]
 
@@ -54,7 +48,7 @@ jobs:
 
     steps:
       - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@1708dda5703a768a0fb0ef6a7a03a0c3805ebc59 #v1.1.1
+        uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.GH_USER_TOKEN }}
           repository: ${{ matrix.repo }}
@@ -65,11 +59,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: publish-npm
     steps:
-    - name: Send Notification in p-wi-notify slack channel
-      uses: rtCamp/action-slack-notify@96d5e2a64fc78a6b7ac13265f55bee296869967a #v2.0.2
+    - name: Send Notification in p-qpp-wi-build-alerts slack channel
+      uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_CHANNEL: "p-wi-notify"
+        SLACK_CHANNEL: "p-qpp-wi-build-alerts"
         SLACK_MESSAGE: "`beneficiary-reporting-validation` has been updated to version <${{github.event.release.html_url}}|${{ github.event.release.tag_name }}>"
         SLACK_TITLE: New beneficiary-reporting-validation release
         SLACK_USERNAME: releaseNotify
