@@ -11,11 +11,11 @@ on:
     types: [published]
 
 jobs:
-  # publish-npm:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout Codebase
-  #       uses: actions/checkout@v2
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v2
 
   #     - name: Configure Node version and registry
   #       uses: actions/setup-node@v1
