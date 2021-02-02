@@ -9,7 +9,8 @@ export interface ValidationResult {
   }
 }
 
-export const ValidateSchema = function<T>(payload: any, schema: new () => T): ValidationResult {
+// class-validator needs type 'object' here - so extending
+export const ValidateSchema = function<T extends object>(payload: any, schema: new () => T): ValidationResult {
   if (!(schema instanceof Object) || typeof payload !== 'object' || payload === null) {
     return { valid: false, error: { code: 422, message: 'Invalid Request: An incorrect payload or schemaType was supplied.' } }
   }
