@@ -1,6 +1,12 @@
 name: Beneficiary Reporting Validation - Publish
 
 on:
+  workflow_dispatch:
+    inputs:
+      recordTag:
+        description: 'Tag'     
+        required: true
+        default: 'manual-run-from github'
   release:
     types: [published]
 
