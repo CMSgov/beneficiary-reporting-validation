@@ -1,0 +1,57 @@
+# Updates package-lock.json file on branches running npmv6
+
+name: Package Lock Updater
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name of package as seen in package.json'
+        required: true
+        default: ''
+      version:
+        description: 'Package version to update'
+        required: true
+        default: ''
+      prTitle:
+        description: 'Title of PR (copy snyk PR)'
+        required: true
+        default: ''
+      prUrl:
+        description: 'URL of snyk PR'
+        required: true
+        default: ''
+
+jobs:
+  updatePackage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Configure Node version and registry
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Update npm to v7
+        run: npm install -g npm@7
+
+      - name: Regenerate package-lock.json
+        run: npm i ${{ github.event.inputs.name }}@${{ github.event.inputs.version }}
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Set branch name
+        id: vars
+        run: echo ::set-output name=branch-name::"snyk-upgrade-lockfile/${{ github.head_ref }}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: updating package-lock.json
+          title: ${{ github.event.inputs.prTitle }}
+          body: Updating package-lock.json file from ${{ github.event.inputs.prUrl }}
+          branch: ${{ steps.vars.outputs.branch-name }}
