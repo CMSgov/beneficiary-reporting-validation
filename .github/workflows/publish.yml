@@ -50,7 +50,7 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.GH_USER_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ matrix.repo }}
           event-type: lib-update-event
           client-payload: '{"ref": "${{ github.ref }}", "private_package": "@cmsgov/wi-validation", "public_package":"@cmsgov/wi-validation" ,"tag_name": "${{ github.event.release.tag_name }}", "html_url": "${{github.event.release.html_url}}"}'
