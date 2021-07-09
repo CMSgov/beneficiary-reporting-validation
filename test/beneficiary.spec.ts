@@ -55,7 +55,7 @@ describe('BeneficiarySchema', () => {
     const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe',
       lastName: 'Doe',
-      medicalNotQualifiedDate: '02-04-2020',
+      medicalNotQualifiedDate: '02-04-2021',
     }, BeneficiarySchema);
     expect(result.valid).toBeTruthy();
   });
@@ -64,7 +64,7 @@ describe('BeneficiarySchema', () => {
     const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe',
       lastName: 'Doe',
-      medicalNotQualifiedDate: '2020-02-04',
+      medicalNotQualifiedDate: '2021-02-04',
     }, BeneficiarySchema);
     expect(result.valid).toBeTruthy();
   });

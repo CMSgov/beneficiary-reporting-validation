@@ -51,7 +51,7 @@ export class BeneficiarySchema {
 
   @IsOptional()
   @Validate(DateString)
-  @Validate(InDateRange, ['2020-01-01','2020-12-31'])
+  @Validate(InDateRange, ['2021-01-01','2021-12-31'])
   medicalNotQualifiedDate!: string | null;
 
   @IsOptional()
