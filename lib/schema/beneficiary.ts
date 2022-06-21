@@ -52,7 +52,7 @@ export class BeneficiarySchema {
 
   @IsOptional()
   @Validate(DateString)
-  @Validate(InDateRange, [`${Constants.PerformanceYear}-01-01`,`${Constants.PerformanceYear}-12-31`])
+  @Validate(InDateRange, [`${Constants.performanceYear}-01-01`,`${Constants.performanceYear}-12-31`])
   medicalNotQualifiedDate!: string | null;
 
   @IsOptional()

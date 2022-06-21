@@ -22,7 +22,7 @@ const goodBene = {
     comments: "Some comments here",
     medicalRecordFound: "NO",
     medicalNotQualifiedReason: "IN_HOSPICE",
-    medicalNotQualifiedDate: new Date(`${Constants.PerformanceYear}-02-06`).toISOString(),
+    medicalNotQualifiedDate: new Date(`${Constants.performanceYear}-02-06`).toISOString(),
     clinicId: 2536773,
     qualificationComments: "This is qualification comment",
 }
