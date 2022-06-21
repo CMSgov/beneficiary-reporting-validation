@@ -1,5 +1,6 @@
 import { BeneficiaryComplexSchema } from '../lib/schema/beneficiary.complex';
 import { ValidateSchema } from '../lib';
+import * as Constants from '../constants'
 
 const goodMeasure = {
     name: "PREV-13",
@@ -21,7 +22,7 @@ const goodBene = {
     comments: "Some comments here",
     medicalRecordFound: "NO",
     medicalNotQualifiedReason: "IN_HOSPICE",
-    medicalNotQualifiedDate: new Date('2021-02-06').toISOString(),
+    medicalNotQualifiedDate: new Date(`${Constants.PerformanceYear}-02-06`).toISOString(),
     clinicId: 2536773,
     qualificationComments: "This is qualification comment",
 }

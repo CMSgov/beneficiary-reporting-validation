@@ -2,6 +2,7 @@ import { Validate, IsString, MaxLength, Matches, IsOptional, IsInt, IsEnum } fro
 
 import { Regexes } from '../regexes';
 import { DateString, InDateRange } from '../custom-validators';
+import * as Constants from '../../constants'
 
 export enum Gender {
   Male = 'MALE',
@@ -51,7 +52,7 @@ export class BeneficiarySchema {
 
   @IsOptional()
   @Validate(DateString)
-  @Validate(InDateRange, ['2021-01-01','2021-12-31'])
+  @Validate(InDateRange, [`${Constants.PerformanceYear}-01-01`,`${Constants.PerformanceYear}-12-31`])
   medicalNotQualifiedDate!: string | null;
 
   @IsOptional()

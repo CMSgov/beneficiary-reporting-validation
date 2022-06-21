@@ -1,6 +1,6 @@
 {
   "name": "@cmsgov/wi-validation",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "CMS Web Interface Client and API Validation",
   "keywords": [
     "validation",
@@ -17,7 +17,6 @@
   },
   "author": "Semantic Bits",
   "contributors": [
-    "James Garrett <james.garrett@semanticbits.com>"
   ],
   "repository": {
     "type": "git",
@@ -25,8 +24,7 @@
   },
   "homepage": "https://github.com/CMSgov/beneficiary-reporting-validation",
   "bugs": {
-    "url": "https://github.com/CMSgov/beneficiary-reporting-validation/issues",
-    "email": "james.garrett@semanticbits.com"
+    "url": "https://github.com/CMSgov/beneficiary-reporting-validation/issues"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
