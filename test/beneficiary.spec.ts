@@ -1,5 +1,6 @@
 import { BeneficiarySchema } from '../lib/schema/beneficiary';
 import { ValidateSchema } from '../lib';
+import * as Constants from '../constants'
 
 describe('BeneficiarySchema', () => {
   it('should validate correctly for MALE', () => {
@@ -46,7 +47,7 @@ describe('BeneficiarySchema', () => {
     const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe',
       lastName: 'Doe',
-      medicalNotQualifiedDate: '2019-02-04',
+      medicalNotQualifiedDate: `2019-02-04`,
     }, BeneficiarySchema);
     expect(result.valid).toBeFalsy();
   });
@@ -55,7 +56,7 @@ describe('BeneficiarySchema', () => {
     const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe',
       lastName: 'Doe',
-      medicalNotQualifiedDate: '02-04-2021',
+      medicalNotQualifiedDate: `02-04-${Constants.performanceYear}`,
     }, BeneficiarySchema);
     expect(result.valid).toBeTruthy();
   });
@@ -64,7 +65,7 @@ describe('BeneficiarySchema', () => {
     const result = ValidateSchema<BeneficiarySchema>({
       firstName: 'Joe',
       lastName: 'Doe',
-      medicalNotQualifiedDate: '2021-02-04',
+      medicalNotQualifiedDate: `${Constants.performanceYear}-02-04`,
     }, BeneficiarySchema);
     expect(result.valid).toBeTruthy();
   });
