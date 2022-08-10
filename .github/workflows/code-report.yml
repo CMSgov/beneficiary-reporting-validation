@@ -1,0 +1,49 @@
+# Code Report Workflow (Daily at 10pm)
+
+name: Code Metrics Report
+
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  code-report:
+    runs-on: ubuntu-latest
+    
+    steps:      
+      - name: Checkout Codebase
+        uses: actions/checkout@v2
+
+      - name: Configure Node version and registry
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          
+      - name: Install Dependencies
+        run: npm ci
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}        
+          
+      - name: Get Lines Count - Deploy
+        run: npx cloc ./NewAcctDeploy --json --report-file=./code_report/deploy.json
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Get Lines Count - Codebase
+        run: npx cloc ./lib --json --report-file=./code-report/codebase.json
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Running Tests - API
+        run: npm run test:cov 2>&1 | tee ./code-report/coverage.txt
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          
+      - name: Compile Code Report
+        run: |
+          echo "Code Report:"
+          echo "Deployment Lines: $(cat ./code_report/deploy.json | jq '.SUM.code')"
+          echo "Code Lines: $(cat ./code-report/codebase.json | jq '.SUM.code')"
+          echo "$(cat ./code-report/api/coverage.txt | tail -12)"
+          
