@@ -25,11 +25,6 @@ jobs:
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}        
           
-      - name: Get Lines Count - Deploy
-        run: npx cloc ./NewAcctDeploy --json --report-file=./code_report/deploy.json
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-
       - name: Get Lines Count - Codebase
         run: npx cloc ./lib --json --report-file=./code-report/codebase.json
         env:
@@ -45,5 +40,5 @@ jobs:
           echo "Code Report:"
           echo "Deployment Lines: $(cat ./code_report/deploy.json | jq '.SUM.code')"
           echo "Code Lines: $(cat ./code-report/codebase.json | jq '.SUM.code')"
-          echo "$(cat ./code-report/api/coverage.txt | tail -12)"
+          echo "$(cat ./code-report/coverage.txt | tail -12)"
           
