@@ -38,7 +38,6 @@ jobs:
       - name: Compile Code Report
         run: |
           echo "Code Report:"
-          echo "Deployment Lines: $(cat ./code_report/deploy.json | jq '.SUM.code')"
           echo "Code Lines: $(cat ./code-report/codebase.json | jq '.SUM.code')"
           echo "$(cat ./code-report/coverage.txt | tail -12)"
           
