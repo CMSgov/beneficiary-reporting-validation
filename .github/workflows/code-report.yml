@@ -1,11 +1,11 @@
-# Code Report Workflow (Daily at 10pm)
+# Code Report Workflow
 
 name: Code Metrics Report
 
 on: 
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * WED'
 
 jobs:
   code-report:
