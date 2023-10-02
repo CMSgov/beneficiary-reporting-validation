@@ -1,6 +1,6 @@
 {
   "name": "@cmsgov/wi-validation",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "CMS Web Interface Client and API Validation",
   "keywords": [
     "validation",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.1",
+    "class-validator": "^0.14.0",
     "date-fns": "^2.28.0",
     "reflect-metadata": "^0.1.13"
   },
