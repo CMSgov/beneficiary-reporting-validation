@@ -14,7 +14,7 @@ export const Regexes = {
   validYear: /^(19|20)\d{2}$/,
   validDate: /^[0-1][0-9]\/[0-3][0-9]\/[1-2][0-9][0-9][0-9]/,
   validCredentials: /^[0-9a-zA-Z'\-\/#,;: ]+$/,
-  email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+  email: /^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/,
   stateAbbreviations: /^(AL|AK|AS|AZ|AR|CA|CO|CT|DE|DC|FL|GA|GU|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|MP|OH|OK|OR|PA|PR|RI|SC|SD|TN|TX|UT|VT|VI|VA|WA|WV|WI|WY)$/i
 }
 
